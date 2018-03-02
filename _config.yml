@@ -1,10 +1,14 @@
+
 # Site Info
-title: Json Lee
-tagline: ' 面目全非，胸有丘壑 '
-description: 'Copy Right (c) <a href="http://lijiansong.github.io" target="_blank">Json Lee</a>.'
+title: NDArray
+tagline: 'A headers only NDArray library based on meta programming'
+description: 'NDArray is a headers only C++11 library for N dimensions tensors expression.'
 baseurl: ""
-url: http://lijiansong.github.io
+url: http://lijiansong.github.io/ndarray
 logo: '/public/logo.png'
+
+github:
+  repo:          https://github.com/lijiansong/ndarray
 
 encoding: utf-8
 #encoding: utf8
@@ -26,44 +30,4 @@ paginate_path: '/blog/page:num'
 permalink: pretty
 
 version: 1.0.0
-
-# About/contact
-author:
-  name: Json Lee
-  description: I am a student at <a href="http://www.ict.ac.cn" target="_blank">Institute of Computing Technology, Chinese Academy of Sciences</a> now.<br> Keep coding and keep living...
-  gravatar: 901595fa4792f47a094c3c0f35fc29f3 # md5 hash of your email address
-  contact:
-    github:    https://github.com/lijiansong
-    weibo:     http://weibo.com/batljs426
-    linkedin:  https://www.linkedin.com/in/json-lee-489748107
-    
-    facebook:  https://www.facebook.com/jiansong.li.71
-    # twitter:   https://twitter.com/lijiansong
-    # email:     http://www.google.com/recaptcha/mailhide/d?k=01I3lZFiZYng9N3QxYEtsDaQ==&c=31wAnZkuKqcG0ATAqJN8Z3ln5kkYLA9TwkGc-IbygpM=
-
-# Navigation (2nd level links supported)
-nav:
-  Home:           
-    - '/'
-  Blog:           
-    - '/blog/'
-    - { Categories: '/blog/categories/' }
-    - { Tags: '/blog/tags/' }
-  About:          
-    - '/about/'
-  Github Project: 
-    - 'https://github.com/lijiansong'
-
-# Where are tags and categories displayed
-tag_page: '/blog/tags/'
-category_page: '/blog/categories/'
-
-hero:
-  image: /public/img/Valgrind.jpg
-  caption: Original Artwork &copy; <a href="http://valgrind.org/">Valgrind™ Developers</a>
-
-# Puglins
-mathjax: true # whether support mathjax
-google_analytics_token: 'UA-00000000-1' # leave blank if you don't want google analytics
-disqus_short_name: 'your_short_name' # leave blank if you don't want disqus
 

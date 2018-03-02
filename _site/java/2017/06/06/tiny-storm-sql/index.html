@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Tiny Storm SQL --- A Real Time Stream Data Analysis Interface for Apache Storm &middot; Json Lee
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/main.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  
+  <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_SVG"> </script>
+  <script type="text/x-mathjax-config">
+MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], processEscapes: true } });
+  </script>
+  
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <div class="sidebar-personal-info">
+      <div class="sidebar-personal-info-section">
+        <a href="http://gravatar.com/901595fa4792f47a094c3c0f35fc29f3">
+          <img src="http://www.gravatar.com/avatar/901595fa4792f47a094c3c0f35fc29f3?s=350" title="View on Gravatar" alt="View on Gravatar" />
+        </a>
+      </div>
+      <div class="sidebar-personal-info-section">
+        <p>I am a student at <a href="http://www.ict.ac.cn" target="_blank">Institute of Computing Technology, Chinese Academy of Sciences</a> now.<br> Keep coding and keep living...</p>
+      </div>
+      
+      
+      
+      <div class="sidebar-personal-info-section">
+        <p> Follow me: 
+        
+        
+        
+        <a href="https://github.com/lijiansong">
+          <i class="fa fa-github" aria-hidden="true"></i>
+        </a>
+        
+        |
+        
+        
+        
+        <a href="http://weibo.com/batljs426">
+          <i class="fa fa-weibo" aria-hidden="true"></i>
+        </a>
+        
+        |
+        
+        
+        
+        <a href="https://www.linkedin.com/in/json-lee-489748107">
+          <i class="fa fa-linkedin" aria-hidden="true"></i>
+        </a>
+        
+        |
+        
+        
+        
+        <a href="https://www.facebook.com/jiansong.li.71">
+          <i class="fa fa-facebook" aria-hidden="true"></i>
+        </a>
+        
+        
+        
+        </p>
+      </div>
+      
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    
+      
+      
+      
+
+      
+
+      <span class="">
+        <a class="sidebar-nav-item " href="/">
+          Home
+        </a>
+
+        
+      </span>
+
+    
+      
+      
+      
+
+      
+
+      <span class="foldable">
+        <a class="sidebar-nav-item " href="/blog/">
+          Blog
+        </a>
+
+        
+          
+            
+            
+            
+              <a class="sidebar-nav-item sidebar-nav-item-sub " href="/blog/categories/">
+                Categories
+              </a>
+          
+        
+          
+            
+            
+            
+              <a class="sidebar-nav-item sidebar-nav-item-sub " href="/blog/tags/">
+                Tags
+              </a>
+          
+        
+      </span>
+
+    
+      
+      
+      
+
+      
+
+      <span class="">
+        <a class="sidebar-nav-item " href="/about/">
+          About
+        </a>
+
+        
+      </span>
+
+    
+      
+      
+      
+
+      
+
+      <span class="">
+        <a class="sidebar-nav-item " href="https://github.com/lijiansong">
+          Github Project
+        </a>
+
+        
+      </span>
+
+    
+
+    <span class="sidebar-nav-item">Currently v1.0.0</span>
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+    &copy; 2017 Json Lee. This work is liscensed under <a href="http://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>.
+    </p>
+  </div>
+
+  <div class="sidebar-item">
+    <p>
+    Powered by <a href="http://jekyllrb.com">jekyll</a> and <a href="http://lijiansong.github.io">Json Lee</a>
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/" title="Home" title="Json Lee">
+              <img class="masthead-logo" src="/public/logo.png"/>
+            </a>
+            <small> 面目全非，胸有丘壑 </small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Tiny Storm SQL --- A Real Time Stream Data Analysis Interface for Apache Storm</h1>
+  <span class="post-date">06 Jun 2017</span>
+   | 
+  
+    <a href="/blog/tags/#platform-tool" class="post-tag">platform tool</a>
+  
+  
+  <article>
+    <div class="message">
+SQL is a well-adopted interface especially for those non-computer major people. Several projects including Hive, Drill, Phoenix and Spark have already invested significantly in their SQL layers. Here we implement a Storm-based query language system for real time stream data analysis. 
+</div>
+<p><!-- more --></p>
+
+<h2 id="relevant-research">Relevant Research</h2>
+<p>For Apache storm <a href="http://storm.apache.org/2017/03/29/storm110-released.html">1.1.0</a> or later version, it has already provided Streaming SQL. In VLDB-2016, <a href="http://data.epfl.ch/">EPFL DATA Lab</a> implemented a streaming online query processing / analytics engine based on Apache Storm named <a href="https://github.com/epfldata/squall"><code class="highlighter-rouge">squall</code></a>.</p>
+
+<h2 id="system-architecture">System Architecture</h2>
+<p>Here we just implement a similar <code class="highlighter-rouge">demo</code> system which supports real time stream data analysis. The whole architecture is shown below:</p>
+
+<p><img src="/assets/blog-img/2017_06_05_architecture.png" alt="image" title="System Architecture" /></p>
+
+<p>As we can see from the above picture, when the user type a SQL-formatted query clause, the query sequence will be translated into a <code class="highlighter-rouge">query plan</code> which presents in the shape of a directed acyclic graph. The DAG-formatted query plan is optimized.
+Then it will be mapped into a Storm topology dynamically. Then the topology will be submitted to Storm cluster for running.</p>
+
+<h2 id="key-compoments">Key Compoments</h2>
+
+<p>Here, the SQL parser is implemented by taking use of <a href="https://github.com/antlr/antlr4">ANTLR</a>. <a href="http://www.antlr.org/">ANTLR(ANother Tool for Language Recognition)</a> is a powerful parser generator. Here we design the following BNF-formatted grammar for SQL:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>grammar sql;
+
+@header {
+package storm_sql.parser;
+}
+
+root
+    : 'select' select_list
+    'from' table_sources
+    ('where' search_condition)?
+    ('group' 'by' group_by_item (',' group_by_item)*)?
+    ('having' search_condition)?
+    ('within' within_time)?
+    ;
+
+
+select_list
+    : select_list_elem (',' select_list_elem)*	#printSelectList
+    ;
+
+select_list_elem
+    : /*(table_name=ID '.' column_name=ID)*/
+    expression					#printSelectListElem
+    | aggregate_function'(' expression ')'	#selectAggregateFunction
+    ;
+
+ID
+    : [a-zA-Z_][a-zA-Z_0-9]*
+    ;
+
+table_sources
+    : table_source (',' table_source)*		#tableSources
+    ;
+
+table_source
+    : ID					#tableSource
+    ;
+
+expression
+    : aggregate_function			#exprAggrFunc
+    | (table_name '.' column_name)		#expr
+    | NUM					#num
+    | ID                    #id
+    ;
+
+NUM
+    : '-'[1-9][0-9]*
+    | '0'
+    | [1-9][0-9]*
+    ;
+
+table_name
+    : ID					#tableName
+    ;
+
+column_name
+    : ID					#columnName
+    ;
+
+aggregate_function
+    : 'avg' | 'max' | 'min' | 'sum'| 'count'
+    ;
+
+search_condition
+    : search_condition_and ('and' search_condition_and)*	#printSearchCondition
+    ;
+
+search_condition_and
+    : expression comparison_operator expression			#printSearchConditionAnd
+    //| '(' search_condition ')'
+    ;
+
+comparison_operator
+    : '=' | '&gt;' | '&lt;' | '&lt;=' | '&gt;=' | '!='
+    ;
+
+group_by_item
+    : expression						#groupByItem
+    ;
+
+within_time
+    : (NUM)							#withinTime
+    ;
+
+WS  : [ \t\r\n]+ -&gt; skip ; // Define whitespace rule, toss it out
+
+</code></pre>
+</div>
+
+<p>By ANTLR <code class="highlighter-rouge">-visitor</code> tool, we can easily visit the AST through <code class="highlighter-rouge">visitor design pattern</code>. We store the necessary info of the sql sequence to build the DAG-formatted query plan. Here we use <a href="https://github.com/jgrapht/jgrapht"><code class="highlighter-rouge">JGraphT</code></a> to traverse the DAG, since it provides various interfaces for handling the DAG. We can eliminate the trouble of reinventing the wheel.
+To automatically generate Storm topology from the DAG-formatted query plan, we need to mark the father and child of each node in the DAG. In the DAG, the source tables are Storm spouts in Storm topology. Similarly, the operators of the DAG is storm bolts in Storm topology, so you need to implement these bolts ahead of schedule. Notice, join and group-by operators are time window based, in Storm, you can simply extend <code class="highlighter-rouge">BaseWindowedBolt</code> to implement the concepts of time window. Of course, you also have to connect to data sources to create Storm spouts to get the stream data. Here we simply create two spouts named <code class="highlighter-rouge">student and tc</code> to simulate the stream source data.</p>
+
+<p>The key features of the system include:</p>
+<ul>
+  <li>the SQL parser is based on <code class="highlighter-rouge">ANTLR</code>, it is universal for users’ typing input;</li>
+  <li>the DAG-formatted query plan is based on <code class="highlighter-rouge">JGraphT</code>, you can access any vertex as you want;</li>
+  <li>the Storm topology is generated from the query plan <code class="highlighter-rouge">dynamically</code>, that is to say the whole system is not limited to a specific application or a specific stream data.</li>
+</ul>
+
+<p>Of course, the demo system is nothing but a demo, there is a lot to be improved. However, you can follow the whole architecture to develop your own interface.</p>
+
+<p>For more details about the src, see <a href="https://github.com/lijiansong/distribution/tree/master/storm/storm-sql/storm-sql/course-project">here…</a></p>
+
+<p>Any questions or suggestions, feel free to open an issue @<a href="https://github.com/lijiansong/distribution/issues">here</a> or e-mail me to <em>lijiansong@ict.ac.cn</em>.</p>
+
+  </article>
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/cpp/2017/03/17/elf-parser/">
+            ELF Parser
+            <small>17 Mar 2017</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/java/android/tech/2017/02/20/modify-blockly/">
+            Modify the Source Code of Google's Open-source Framework --- Blockly
+            <small>20 Feb 2017</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/temper/2017/02/05/crazy-coder/">
+            Crazy Coder
+            <small>05 Feb 2017</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+
+<div class="comments">
+  <h2>Comments</h2>
+  <div id="disqus_thread"></div>
+  <script>
+var disqus_config = function () {
+  this.page.url = 'http://lijiansong.github.io/java/2017/06/06/tiny-storm-sql/'; // Replace PAGE_URL with your page's canonical URL variable
+  this.page.identifier = '/java/2017/06/06/tiny-storm-sql'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+(function() {
+  var d = document, s = d.createElement('script');
+  s.src = '//your_short_name.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</div>
+
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', function(e) {
+          var target = e.target;
+
+          if (target === toggle) {
+            checkbox.checked = !checkbox.checked;
+            e.preventDefault();
+          } else if (checkbox.checked && !sidebar.contains(target)) {
+            /* click outside the sidebar when sidebar is open */
+            checkbox.checked = false;
+          }
+        }, false);
+      })(document);
+    </script>
+    
+    <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-00000000-1', 'auto');
+ga('send', 'pageview');
+    </script>
+    
+  </body>
+  
+  <script id="dsq-count-scr" src="//your_short_name.disqus.com/count.js" async></script>
+  
+</html>

@@ -15,7 +15,7 @@ CXX_FLAGS := -std=c++11 -w
 
 # Include directories
 NANO_INC := ../third_party/
-ND_INC := ..
+ND_INC := ../include
 
 # Rules
 ndarray_foo.o: ndarray_foo.cpp
@@ -24,7 +24,7 @@ ndarray_foo.o: ndarray_foo.cpp
 container_foo.o: container_foo.cpp
 	$(CXX) -I $(ND_INC) -I $(NANO_INC) $(CXX_FLAGS) -o $@ -c $<
 
-operator_foo.o: operator_foo.cpp
+operation_foo.o: operation_foo.cpp
 	$(CXX) -I $(ND_INC) -I $(NANO_INC) $(CXX_FLAGS) -o $@ -c $<
 
 traits_foo.o: traits_foo.cpp
@@ -36,7 +36,7 @@ ndarray: ndarray_foo.o
 traits: traits_foo.o
 	$(CXX) -o $(TRAITS) $+
 
-operator: operator_foo.o
+operation: operation_foo.o
 	$(CXX) -o $(OPERATOR) $+
 
 container: container_foo.o

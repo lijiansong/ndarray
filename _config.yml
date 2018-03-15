@@ -8,7 +8,7 @@ url: http://lijiansong.github.io/ndarray
 logo: '/public/logo.png'
 
 github:
-  repo:          https://github.com/lijiansong/ndarray
+  repo: https://github.com/lijiansong/ndarray
 
 encoding: utf-8
 #encoding: utf8

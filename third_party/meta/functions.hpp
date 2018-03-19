@@ -27,7 +27,7 @@
 #ifndef NANO_FUNCTIONS_HPP
 #define NANO_FUNCTIONS_HPP
 
-#include <nano/eval.hpp>
+#include <meta/eval.hpp>
 
 namespace nano {
 

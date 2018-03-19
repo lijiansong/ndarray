@@ -36,7 +36,7 @@
 #ifndef NANO_HIGHER_ORDER_FUNCTIONS
 #define NANO_HIGHER_ORDER_FUNCTIONS
 
-#include <nano/list.hpp>
+#include <meta/list.hpp>
 
 namespace nano {
     

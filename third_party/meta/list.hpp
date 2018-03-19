@@ -27,7 +27,7 @@
 #ifndef NANO_LIST_HPP
 #define NANO_LIST_HPP
 
-#include <nano/functions.hpp>
+#include <meta/functions.hpp>
 #include <cassert>
 
 namespace nano {

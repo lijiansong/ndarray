@@ -9,7 +9,7 @@ namespace ndarray {
 template <typename Dtype, size_t... Sizes>
 class NDArrayContainer;
 
-// static container
+// static containers
 template <typename Dtype, size_t SizeFirst, size_t... SizeRest>
 class NDArrayContainer<Dtype, SizeFirst, SizeRest...> {
 public:
@@ -17,7 +17,7 @@ public:
     using data_type = Dtype;
     using dimension_sizes = nano::list<nano::size_t<SizeFirst>, nano::size_t<SizeRest>...>;
     using dimension_product = nano::multiplies<dimension_sizes>;
-    using data_container = std::array<data_type, dimension_product::result>; // data storage for static container
+    using data_container = std::array<data_type, dimension_product::result>;
     using dim_container = typename nano::runtime_converter<dimension_sizes>::array_type;
     using size_type = typename data_container::size_type;
     using iterator = typename data_container::iterator;

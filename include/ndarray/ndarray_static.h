@@ -21,9 +21,8 @@ template <typename DT, size_t SF, size_t... SR>
 using StaticNDArray = NDArrayInterface<NDArrayTraits<DT, SF, SR...>>;
 
 template <typename DT, size_t SF, size_t... SR>
-class NDArrayInterface<NDArrayTraits<DT, SF, SR...>> : public NDArrayExpr<
-                                                                    StaticNDArray<DT, SF, SR...>,
-                                                                    NDArrayTraits<DT, SF, SR...>> {
+class NDArrayInterface<NDArrayTraits<DT, SF, SR...>> : public NDArrayExpr<StaticNDArray<DT, SF, SR...>, NDArrayTraits<DT, SF, SR...>> {
+
 public:
     // ---------------------------------------- ALIAS'S ----------------------------------------------------- 
     using traits = NDArrayTraits<DT, SF, SR...>;
@@ -48,7 +47,7 @@ public:
     
     constexpr size_type size() const { return _data.size(); }
  
-    inline size_type dim_size(const size_type dim) const { return dim < rank() ? _dim_sizes[dim] : 0; }
+    inline size_type dim_size(const size_type dim_index) const { return dim_index < rank() ? _dim_sizes[dim_index] : 0; }
     
     constexpr const dim_container& dim_sizes() const { return _dim_sizes; }
     
@@ -66,37 +65,33 @@ public:
     // TODO: add slice, reduce, and reshape operations
 
 private:
-    data_container _data; // The data container which holds all the data
-    dim_container _dim_sizes; // The sizes of the dimensions for the ndarray
+    data_container _data; // Data container which holds all the data
+    dim_container _dim_sizes; // Sizes of the dimensions
 };
 
 // ----------------------------------------------- IMPL -----------------------------------------------------
 
-
 template <typename DT, size_t SF, size_t...SR>
 NDArrayInterface<NDArrayTraits<DT, SF, SR...>>::NDArrayInterface() {
     // Convert the nano::list of dimension sizes to a constant array
-     _dim_sizes = nano::runtime_converter<typename container_type::dimension_sizes>::to_array(); 
+     _dim_sizes = nano::runtime_converter<typename container_type::dimension_sizes>::to_array();
 };
 
 template <typename DT, size_t SF, size_t...SR>
-NDArrayInterface<NDArrayTraits<DT, SF, SR...>>::NDArrayInterface(data_container& data)
-: _data(data) {
-    // Convert the nano::list of dimension sizes to a constant array
+NDArrayInterface<NDArrayTraits<DT, SF, SR...>>::NDArrayInterface(data_container& data) : _data(data) {
     _dim_sizes = nano::runtime_converter<typename container_type::dimension_sizes>::to_array();
 }
 
 template <typename DT, size_t SF, size_t...SR> template <typename... TR> 
-NDArrayInterface<NDArrayTraits<DT, SF, SR...>>::NDArrayInterface(DT&& first_value, TR&&... other_values) 
+NDArrayInterface<NDArrayTraits<DT, SF, SR...>>::NDArrayInterface(DT&& first_value, TR&&... other_values)
 : _data{{std::forward<DT>(first_value), std::forward<TR>(other_values)...}} {
-    // Convert the nano::list of dimension sizes to a constant array
-    _dim_sizes = nano::runtime_converter<typename container_type::dimension_sizes>::to_array(); 
+    _dim_sizes = nano::runtime_converter<typename container_type::dimension_sizes>::to_array();
 }
 
 template <typename DT, size_t SF, size_t...SR> template <typename E, typename T> 
 NDArrayInterface<NDArrayTraits<DT, SF, SR...>>::NDArrayInterface(const NDArrayExpr<E, T>& expression) {
     // Convert the nano::list of dimension sizes to a constant array
-    _dim_sizes = nano::runtime_converter<typename container_type::dimension_sizes>::to_array();  
+    _dim_sizes = nano::runtime_converter<typename container_type::dimension_sizes>::to_array();
     for (size_type i = 0; i != size(); ++i) _data[i] = expression[i];
 }
 

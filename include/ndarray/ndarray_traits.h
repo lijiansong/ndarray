@@ -20,4 +20,5 @@ struct NDArrayTraits<Dtype, SizeFirst, SizeRest...> {
 };
 
 } // end of namespace ndarray
+
 #endif // NDARRAY_TRAITS_H

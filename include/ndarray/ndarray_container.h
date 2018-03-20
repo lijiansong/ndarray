@@ -25,12 +25,10 @@ public:
 
     NDArrayContainer() {}
 
-    constexpr NDArrayContainer(data_container& data)
-    : _data(data) {}
+    constexpr NDArrayContainer(data_container& data) : _data(data) {}
 
     template <typename... TR> 
-    constexpr NDArrayContainer(TR&&... values)
-    : _data{{std::forward<TR>(values)...}} {}
+    constexpr NDArrayContainer(TR&&... values) : _data{{std::forward<TR>(values)...}} {}
 
     constexpr size_t size() const { return dimension_product::result; }
     

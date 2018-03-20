@@ -16,22 +16,14 @@ struct MapToIndexStatic;
 
 template <typename DimSizes, typename IF, typename... IR>
 struct MapToIndexStatic<DimSizes, IF, IR...> {
-    // On each iteration the product of the size of all successive dimensions must be calculated
-    // to determine the memory offset of this dimension, so determine the stopping index
     using end_index = typename std::conditional<
                         DimSizes::size - sizeof...(IR) == 1,
                         typename nano::size_t<0>,
                         typename nano::size_t<DimSizes::size - sizeof...(IR) - 2>>::type;
     
-    // The product sum of the successive dimensions (successive iterations), e.g. if we are on iteration
-    // 3 then this is the product of the size of dimension 0 and 1
     static constexpr size_t dim_product_sum = nano::accumulate<DimSizes, 0, end_index::value, 1>::result;
     
-    // The offset calculation 
     static constexpr size_t offset(size_t current_offset, IF&& index_first, IR&&... indices_rest) {
-        // Recursively call until the terminating case 
-        // If first iteration use index_first as offset
-        // if other iteration, add mult with successive products
         return DimSizes::size - sizeof...(IR) == 1
              ? MapToIndexStatic<DimSizes, IR...>::offset(current_offset + index_first,
                                                          std::forward<IR>(indices_rest)...) 
@@ -40,10 +32,9 @@ struct MapToIndexStatic<DimSizes, IF, IR...> {
     }
 };
 
-// Terminating (base) case
+// Terminate case
 template <typename DimSizes>
 struct MapToIndexStatic<DimSizes> {
-    // Just need to return the result here
     static constexpr size_t offset(size_t current_offset) { return current_offset; }
 };
 

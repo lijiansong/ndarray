@@ -11,4 +11,4 @@ using NDArray = NDArrayInterface<NDArrayTraits<Dtype, DimSizes...>>;
 
 } // end of namespace ndarray
 
-#endif // NDARRAY_INTERFACE_H
+#endif // NDARRAY_H

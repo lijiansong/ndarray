@@ -1,5 +1,5 @@
-#ifndef NDARRAY_MULTIPLICATION_H
-#define NDARRAY_MULTIPLICATION_H
+#ifndef NDARRAY_MUL_H
+#define NDARRAY_MUL_H
 
 #include "ndarray_expr_static.h"
 
@@ -38,4 +38,4 @@ NDArrayMultiplication<E1, E2, T1, T2>::NDArrayMultiplication(const NDArrayExpr<E
 
 } // end of namespace ndarray  
 
-#endif // NDARRAY_MULTIPLICATION_H
+#endif // NDARRAY_MUL_H

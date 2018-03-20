@@ -1,5 +1,5 @@
-#ifndef NDARRAY_SUBTRACTION_H
-#define NDARRAY_SUBTRACTION_H
+#ifndef NDARRAY_SUB_H
+#define NDARRAY_SUB_H
 
 #include "ndarray_expr_static.h"
 
@@ -38,4 +38,4 @@ NDArraySubtraction<E1, E2, T1, T2>::NDArraySubtraction(const NDArrayExpr<E1, T1>
 
 }// end of namespace ndarray
 
-#endif // NDARRAY_SUBTRACTION_H
+#endif // NDARRAY_SUB_H

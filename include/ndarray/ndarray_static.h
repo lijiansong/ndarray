@@ -11,6 +11,7 @@ namespace ndarray {
 
 template <typename Traits>
 class NDArrayInterface;
+
 // Template parameters:
 //  - DT = Dtype        = data type
 //  - SF = SizeFirst    = size of first dimension
@@ -47,7 +48,7 @@ public:
     
     constexpr size_type size() const { return _data.size(); }
  
-    inline size_type size(const size_type dim) const { return dim < rank() ? _dim_sizes[dim] : 0; }
+    inline size_type dim_size(const size_type dim) const { return dim < rank() ? _dim_sizes[dim] : 0; }
     
     constexpr const dim_container& dim_sizes() const { return _dim_sizes; }
     
@@ -120,4 +121,5 @@ DT NDArrayInterface<NDArrayTraits<DT, SF, SR...>>::operator()(IF dim_one_index, 
 }
 
 } // end of namespace ndarray
+
 #endif // NDARRAY_STATIC_H

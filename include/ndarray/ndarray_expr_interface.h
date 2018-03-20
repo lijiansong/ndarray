@@ -10,4 +10,4 @@ class NDArrayExpr;
 
 } // end of namespace ndarray
 
-#endif // NDARRAY_EXPRESSION_INTERFACE_H
+#endif // NDARRAY_EXPR_INTERFACE_H

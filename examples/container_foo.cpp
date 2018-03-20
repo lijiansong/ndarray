@@ -42,7 +42,8 @@ BOOST_AUTO_TEST_CASE(NDarrayConatinerIterator) {
   float a[4];
   auto it = A.begin(), ie = A.end();
   std::size_t i = 0;
-  for (; it != ie; ++it, ++i) a[i] = *it;
+  for (; it != ie; ++it, ++i)
+    a[i] = *it;
   BOOST_CHECK(A.size() == 4);
   BOOST_CHECK(a[0] == 1.f);
   BOOST_CHECK(a[1] == 2.5f);

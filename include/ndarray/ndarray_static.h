@@ -13,9 +13,9 @@ template <typename Traits>
 class NDArrayInterface;
 
 // Template parameters:
-//  - DT = Dtype        = data type
-//  - SF = SizeFirst    = size of first dimension
-//  - SR = SizeRest     = size of other dimensions
+//  - DT = data type
+//  - SF = size of first dimension
+//  - SR = size of other dimensions
 
 template <typename DT, size_t SF, size_t... SR>
 using StaticNDArray = NDArrayInterface<NDArrayTraits<DT, SF, SR...>>;
@@ -62,7 +62,16 @@ public:
    
     template <typename IF, typename... IR>
     DT operator()(IF index_dim_one, IR... index_dim_other) const;
-    // TODO: add slice, reduce, and reshape operations
+
+    DT sum();
+
+    DT max();
+
+    DT min();
+
+    template <size_t FD, size_t... RD>
+    StaticNDArray<DT, FD, RD...> reshape();
+    // TODO: add slice and local reduce operations
 
 private:
     data_container _data; // Data container which holds all the data
@@ -113,6 +122,42 @@ template <typename DT, size_t SF, size_t...SR> template <typename IF, typename..
 DT NDArrayInterface<NDArrayTraits<DT, SF, SR...>>::operator()(IF dim_one_index, IR... other_dim_indices) const {
     using dimension_sizes = typename container_type::dimension_sizes;
     return _data[StaticMapper::indices_to_index<dimension_sizes>(dim_one_index, other_dim_indices...)];
+}
+
+template <typename DT, size_t SF, size_t... SR>
+DT NDArrayInterface<NDArrayTraits<DT, SF, SR...>>::sum() {
+    DT sum = static_cast<DT>(0);
+    for(auto &&it : _data) {
+        sum += it;
+    }
+    return sum;
+}
+
+template <typename DT, size_t SF, size_t... SR>
+DT NDArrayInterface<NDArrayTraits<DT, SF, SR...>>::max() {
+    DT max = _data[0];
+    for(auto &&it : _data) {
+        max = max > it ? max : it;
+    }
+    return max;
+}
+
+template <typename DT, size_t SF, size_t... SR>
+DT NDArrayInterface<NDArrayTraits<DT, SF, SR...>>::min() {
+    DT min = _data[0];
+    for(auto &&it : _data) {
+        min = min < it ? min : it;
+    }
+    return min;
+}
+
+template <typename DT, size_t SF, size_t... SR> template <size_t FD, size_t... RD>
+StaticNDArray<DT, FD, RD...> NDArrayInterface<NDArrayTraits<DT, SF, SR...>>::reshape() {
+    using dim_sizes = nano::list<nano::size_t<FD>, nano::size_t<RD>...>;
+    using dim_product = nano::multiplies<dim_sizes>;
+    static_assert(dim_product::result == container_type::dimension_product::result, "Error! Reshape must have same dimension product!");
+    return StaticNDArray<DT, FD, RD...>(_data);
+    //tmp._dim_sizes = nano::runtime_converter<dim_sizes>::to_array();
 }
 
 } // end of namespace ndarray

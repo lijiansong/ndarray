@@ -6,16 +6,21 @@
 
 namespace ndarray {
 
-template <typename Dtype, size_t... Sizes>
+template <typename DT, size_t... Sizes>
 class NDArrayContainer;
 
+// Template parameters:
+//  - DT = data type
+//  - SF = size of first dimension
+//  - SR = size of other dimensions
+
 // static containers
-template <typename Dtype, size_t SizeFirst, size_t... SizeRest>
-class NDArrayContainer<Dtype, SizeFirst, SizeRest...> {
+template <typename DT, size_t SF, size_t... SR>
+class NDArrayContainer<DT, SF, SR...> {
 public:
     // ---------------------------------------- ALIAS'S -----------------------------------------------------
-    using data_type = Dtype;
-    using dimension_sizes = nano::list<nano::size_t<SizeFirst>, nano::size_t<SizeRest>...>;
+    using data_type = DT;
+    using dimension_sizes = nano::list<nano::size_t<SF>, nano::size_t<SR>...>;
     using dimension_product = nano::multiplies<dimension_sizes>;
     using data_container = std::array<data_type, dimension_product::result>;
     using dim_container = typename nano::runtime_converter<dimension_sizes>::array_type;

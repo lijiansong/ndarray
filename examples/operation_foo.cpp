@@ -105,4 +105,64 @@ BOOST_AUTO_TEST_CASE(NDarrayOperationPriority) {
   BOOST_CHECK(F[3] == 0);
 }
 
+BOOST_AUTO_TEST_CASE(NDarrayGlobalReduction) {
+    ndarray::NDArray<int, 1, 2, 3> A{1, 2, 3, 4, 5, 6};
+    BOOST_CHECK(A.sum() == 21);
+    BOOST_CHECK(A.max() == 6);
+    BOOST_CHECK(A.min() == 1);
+
+    ndarray::NDArray<float, 2, 3> B{1.f, -2.2f, -3.f, 2.2f, 3.f, 4.99f};
+    BOOST_CHECK(B.sum() == 5.99f);
+    BOOST_CHECK(B.max() == 4.99f);
+    BOOST_CHECK(B.min() == -3.f);
+}
+
+BOOST_AUTO_TEST_CASE(NDarrayReshape) {
+    ndarray::NDArray<int, 1, 2, 3> A{1, 2, 3, 4, 5, 6};
+  auto dim_sizes_a = A.dim_sizes();
+  BOOST_CHECK(dim_sizes_a[0] == 1);
+  BOOST_CHECK(dim_sizes_a[1] == 2);
+  BOOST_CHECK(dim_sizes_a[2] == 3);
+  BOOST_CHECK(A.dim_size(0) == 1);
+  BOOST_CHECK(A.dim_size(1) == 2);
+  BOOST_CHECK(A.dim_size(2) == 3);
+    BOOST_CHECK(A.rank() == 3);
+    BOOST_CHECK(A.size() == 6);
+    BOOST_CHECK(A[0] == 1);
+    BOOST_CHECK(A[1] == 2);
+    BOOST_CHECK(A[2] == 3);
+    BOOST_CHECK(A[3] == 4);
+    BOOST_CHECK(A[4] == 5);
+    BOOST_CHECK(A[5] == 6);
+    BOOST_CHECK(A(0, 0, 0) == 1);
+    BOOST_CHECK(A(0, 0, 1) == 3);
+    BOOST_CHECK(A(0, 0, 2) == 5);
+    BOOST_CHECK(A(0, 1, 0) == 2);
+    BOOST_CHECK(A(0, 1, 1) == 4);
+    BOOST_CHECK(A(0, 1, 2) == 6);
+
+    auto B = A.reshape<3, 2>();
+  auto dim_sizes_b = B.dim_sizes();
+  BOOST_CHECK(dim_sizes_b[0] == 3);
+  BOOST_CHECK(dim_sizes_b[1] == 2);
+
+  BOOST_CHECK(B.dim_size(0) == 3);
+  BOOST_CHECK(B.dim_size(1) == 2);
+    BOOST_CHECK(B.rank() == 2);
+    BOOST_CHECK(B.size() == 6);
+    BOOST_CHECK(B[0] == 1);
+    BOOST_CHECK(B[1] == 2);
+    BOOST_CHECK(B[2] == 3);
+    BOOST_CHECK(B[3] == 4);
+    BOOST_CHECK(B[4] == 5);
+    BOOST_CHECK(B[5] == 6);
+    BOOST_CHECK(B(0, 0) == 1);
+    BOOST_CHECK(B(0, 1) == 4);
+    BOOST_CHECK(B(1, 0) == 2);
+    BOOST_CHECK(B(1, 1) == 5);
+    BOOST_CHECK(B(2, 0) == 3);
+    BOOST_CHECK(B(2, 1) == 6);
+
+}
+
 BOOST_AUTO_TEST_SUITE_END()

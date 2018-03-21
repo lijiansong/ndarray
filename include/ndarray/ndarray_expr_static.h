@@ -6,9 +6,9 @@
 namespace ndarray {
 
 // Template parameters:
-//  - DT = Dtype        = data type
-//  - SF = SizeFirst    = size of first dimension
-//  - SR = SizeRest     = size of other dimensions
+//  - DT = data type
+//  - SF = size of first dimension
+//  - SR = size of other dimensions
 
 template <typename Expression, typename DT, size_t SF, size_t... SR>
 class NDArrayExpr<Expression, NDArrayTraits<DT, SF, SR...>> {

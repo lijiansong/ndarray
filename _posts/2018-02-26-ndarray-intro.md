@@ -2,14 +2,11 @@
 layout: page 
 title: NDArray Introduction
 ---  
-<div class="mesage">
 
 NDArray is short for N Dimension Array, it is a C++11 based template library. It is designed to simplify the expressions between NDArrays( i.e. Tensor). Since in deep learning applications, tensor can be seen everywhere, it is necessary to wrap its operations to lower the difficulty and cost of application developers. Existing open source NDArray(i.e. Tensor) is [Eigen](https://bitbucket.org/eigen/), it has been integrated into many projects, such as
 (TensorFlow)[https://github.com/tensorflow/tensorflow].
 
 More details about NDArray(Tensor), see this wiki [page](https://en.wikipedia.org/wiki/Tensor).
-
-</div>
 
 ## 1. Key Feature
 

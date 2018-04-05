@@ -1,9 +1,20 @@
 ---
 layout: default
-title: Home
 ---
 
-<div class="hero">
-  <img src="{{ site.baseurl }}{{ site.hero.image }}" />
-  <p>{{ site.hero.caption }}</p>
+<div class="posts">
+  {% for post in paginator.posts %}
+  <div class="post">
+    <h1 class="post-title">
+      <!--<a href="{{ post.url }}">
+        {{ post.title }}
+        </a>-->
+    </h1>
+
+    <span class="post-date">{{ }}</span>
+
+    {{ post.content }}
+  </div>
+  {% endfor %}
 </div>
+

@@ -1,33 +1,29 @@
+# Dependencies
+markdown: kramdown
+pygments: true
+timezone: Asia/Shanghai
+#permalink: /:year-:month-:day.html
+permalink: pretty
 
 # Site Info
-title: NDArray
-tagline: 'A headers only NDArray library based on meta programming'
-description: 'NDArray is a headers only C++11 library for N dimensions tensors expression.'
-baseurl: ""
+title: "NDArray:"
+tagline: 'A headers only C++11 template library based on meta programming'
+baseurl: /ndarray
 url: http://lijiansong.github.io/ndarray
-logo: '/public/logo.png'
 
 github:
   repo: https://github.com/lijiansong/ndarray
 
 encoding: utf-8
-#encoding: utf8
+
+author:
+  name:           'Json Lee'
+  description: 'NDArray is a headers only C++11 template library for N dimensions tensor expressions.'
+  url:             https://lijiansong.github.io/ndarray
 
 # Site configurations
 gems:
   - jekyll-paginate
-markdown: kramdown
-kramdown:
-  input: GFM
-excerpt_separator: "<!-- more -->"
-highlighter: rouge
-#highlighter: pygments
-sass:
-  style: compressed
-  sass_dir: _scss    
-paginate: 5
-paginate_path: '/blog/page:num'
-permalink: pretty
 
 version: 1.0.0
 

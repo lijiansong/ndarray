@@ -1,7 +1,8 @@
-# lijiansong.github.io
->This archive is my technological blog site regarding the summary of a certain stage of my work & study.
+# NDArray GitHub Page
+This branch is the github page of `ndarray`.
 
-Visit [HomePage](http://lijiansong.github.io)
+## TODO
+Fix the git page later...
 
-Postscript:
-This archive will be updated regularly.
+## Acknowledge
+The whole site is powered by [jekyll](https://jekyllrb.com) and theme [lanyon](https://github.com/poole/lanyon) by [Poole](https://github.com/poole)

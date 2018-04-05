@@ -6,7 +6,7 @@ pygments: true
 permalink: pretty
 
 # Site Info
-title: "NDArray:"
+title: "NDArray:  "
 tagline: 'A headers only template library based on meta programming'
 
 url: https://lijiansong.github.io/ndarray
@@ -18,12 +18,11 @@ github:
 encoding: utf-8
 
 author:
-  name:           'Json Lee'
+  name: 'Json Lee'
   description: 'NDArray is a headers only C++11 template library for N dimensions tensor expressions.'
   url:             https://lijiansong.github.io/ndarray
 
 # Site configurations
-
 paginate: 5
 #gems:
 #  - jekyll-paginate

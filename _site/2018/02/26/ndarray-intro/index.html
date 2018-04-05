@@ -70,13 +70,18 @@
     
       
         
+          <a class="sidebar-nav-item" href="/ndarray/ndarray_api/">API Documention</a>
+        
+      
+    
+      
+        
           <a class="sidebar-nav-item" href="/ndarray/usage/">NDArray Usage</a>
         
       
     
 
-    <a class="sidebar-nav-item" href="https://github.com/lijiansong/ndarray">GitHub project</a>
-    <a class="sidebar-nav-item" href="https://github.com/lijiansong/ndarray">API Documention</a>
+    <a class="sidebar-nav-item" href="https://github.com/lijiansong/ndarray">GitHub Project</a>
     <a class="sidebar-nav-item" href="https://github.com/lijiansong/ndarray/archive/master.zip">Download</a>
     <span class="sidebar-nav-item">Currently v1.0.0</span>
   </nav>
@@ -98,7 +103,7 @@
 
           <h3 class="masthead-title">
             <a href="/ndarray" title="Home">NDArray:</a>
-            <small>A headers only C++11 template library based on meta programming</small>
+            <small>A headers only template library based on meta programming</small>
           </h3>
         </div>
       </div>
@@ -110,9 +115,10 @@
 
 <h2 id="key-feature">Key Feature</h2>
 
-<p>Firstly, during the implementation of NDArray, many <a href="https://en.wikipedia.org/wiki/C%2B%2B11">C++11</a> new features is used, e.g. Rvalue references, variadic templates, initializer lists,  type_traits and etc.
-Besides, NDArray provides much flexibility, because its design concept comes from <a href="https://en.wikipedia.org/wiki/Standard_Template_Library">STL</a> container and <a href="https://bitbucket.org/eigen/">Eigen</a>.
-NDArray provides both static and dynamic containers. Here, <code>static</code> means if each dimension of NDArray is known during compiling time. While each dimension of dynamic ndarray is variable at compiling time.</p>
+<p>Firstly, during the implementation of NDArray, many <a href="https://en.wikipedia.org/wiki/C%2B%2B11">C++11</a> new features is used, e.g. Rvalue references, variadic templates, initializer lists,  type_traits and etc.</p>
+
+<p>Besides, NDArray provides much flexibility, because its design concept comes from <a href="https://en.wikipedia.org/wiki/Standard_Template_Library">STL</a> container and <a href="https://bitbucket.org/eigen/">Eigen</a>.
+NDArray provides both static and dynamic containers. Here, <code>static</code> means if each dimension of NDArray is known during compiling time. While each dimension of dynamic ndarray is variable at compiling time. And to guarantee performance, we take use of <code>lazy evaluation</code>.</p>
 
 <h2 id="installation">Installation</h2>
 

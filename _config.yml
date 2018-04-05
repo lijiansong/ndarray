@@ -1,15 +1,16 @@
 # Dependencies
 markdown: kramdown
 pygments: true
-timezone: Asia/Shanghai
-#permalink: /:year-:month-:day.html
+#timezone: Asia/Shanghai
+
 permalink: pretty
 
 # Site Info
 title: "NDArray:"
-tagline: 'A headers only C++11 template library based on meta programming'
+tagline: 'A headers only template library based on meta programming'
+
+url: https://lijiansong.github.io/ndarray
 baseurl: /ndarray
-url: http://lijiansong.github.io/ndarray
 
 github:
   repo: https://github.com/lijiansong/ndarray
@@ -22,8 +23,10 @@ author:
   url:             https://lijiansong.github.io/ndarray
 
 # Site configurations
-gems:
-  - jekyll-paginate
+
+paginate: 5
+#gems:
+#  - jekyll-paginate
 
 version: 1.0.0
 

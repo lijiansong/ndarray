@@ -4,7 +4,7 @@
  <title>NDArray:</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-04-05T22:03:53+08:00</updated>
+ <updated>2018-04-05T23:52:18+08:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Json Lee</name>
@@ -21,9 +21,10 @@
 
 &lt;h2 id=&quot;key-feature&quot;&gt;Key Feature&lt;/h2&gt;
 
-&lt;p&gt;Firstly, during the implementation of NDArray, many &lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11&quot;&gt;C++11&lt;/a&gt; new features is used, e.g. Rvalue references, variadic templates, initializer lists,  type_traits and etc.
-Besides, NDArray provides much flexibility, because its design concept comes from &lt;a href=&quot;https://en.wikipedia.org/wiki/Standard_Template_Library&quot;&gt;STL&lt;/a&gt; container and &lt;a href=&quot;https://bitbucket.org/eigen/&quot;&gt;Eigen&lt;/a&gt;.
-NDArray provides both static and dynamic containers. Here, &lt;code&gt;static&lt;/code&gt; means if each dimension of NDArray is known during compiling time. While each dimension of dynamic ndarray is variable at compiling time.&lt;/p&gt;
+&lt;p&gt;Firstly, during the implementation of NDArray, many &lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11&quot;&gt;C++11&lt;/a&gt; new features is used, e.g. Rvalue references, variadic templates, initializer lists,  type_traits and etc.&lt;/p&gt;
+
+&lt;p&gt;Besides, NDArray provides much flexibility, because its design concept comes from &lt;a href=&quot;https://en.wikipedia.org/wiki/Standard_Template_Library&quot;&gt;STL&lt;/a&gt; container and &lt;a href=&quot;https://bitbucket.org/eigen/&quot;&gt;Eigen&lt;/a&gt;.
+NDArray provides both static and dynamic containers. Here, &lt;code&gt;static&lt;/code&gt; means if each dimension of NDArray is known during compiling time. While each dimension of dynamic ndarray is variable at compiling time. And to guarantee performance, we take use of &lt;code&gt;lazy evaluation&lt;/code&gt;.&lt;/p&gt;
 
 &lt;h2 id=&quot;installation&quot;&gt;Installation&lt;/h2&gt;
 

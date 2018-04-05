@@ -9,8 +9,9 @@ NDArray is a c++11 based template library. It is designed to simplify the expres
 ## Key Feature
 
 Firstly, during the implementation of NDArray, many [C++11](https://en.wikipedia.org/wiki/C%2B%2B11) new features is used, e.g. Rvalue references, variadic templates, initializer lists,  type_traits and etc.
+
 Besides, NDArray provides much flexibility, because its design concept comes from [STL](https://en.wikipedia.org/wiki/Standard_Template_Library) container and [Eigen](https://bitbucket.org/eigen/).
-NDArray provides both static and dynamic containers. Here, `static` means if each dimension of NDArray is known during compiling time. While each dimension of dynamic ndarray is variable at compiling time.
+NDArray provides both static and dynamic containers. Here, `static` means if each dimension of NDArray is known during compiling time. While each dimension of dynamic ndarray is variable at compiling time. And to guarantee performance, we take use of `lazy evaluation`.
 
 ## Installation
 

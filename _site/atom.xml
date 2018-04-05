@@ -4,7 +4,7 @@
  <title>NDArray:  </title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-04-06T03:35:32+08:00</updated>
+ <updated>2018-04-06T03:37:36+08:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Json Lee</name>
@@ -18,7 +18,7 @@
    <updated>2018-02-26T00:00:00+08:00</updated>
    <id>http://localhost:4000/2018/02/26/ndarray-intro</id>
    <content type="html">&lt;p&gt;NDArray is short for N Dimension Array, it is a C++11 based template library. It is designed to simplify the expressions between NDArrays( i.e. Tensor). Since in deep learning applications, tensor can be seen everywhere, it is necessary to wrap its operations to lower the difficulty and cost of application developers. Existing open source NDArray(i.e. Tensor) is &lt;a href=&quot;https://bitbucket.org/eigen/&quot;&gt;Eigen&lt;/a&gt;, it has been integrated into many projects, such as
-(TensorFlow)[https://github.com/tensorflow/tensorflow].&lt;/p&gt;
+&lt;a href=&quot;https://github.com/tensorflow/tensorflow&quot;&gt;TensorFlow&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;More details about NDArray(Tensor), see this wiki &lt;a href=&quot;https://en.wikipedia.org/wiki/Tensor&quot;&gt;page&lt;/a&gt;.&lt;/p&gt;
 

@@ -1,10 +1,11 @@
 #ifndef NDARRAY_STATIC_H
 #define NDARRAY_STATIC_H
 
-#include <random>
 #include "indices_mapper.h"
 #include "ndarray_expr_static.h"
 
+#include <random>
+#include <ostream>
 #include <type_traits>
 
 namespace ndarray {
@@ -158,6 +159,23 @@ StaticNDArray<DT, FD, RD...> NDArrayInterface<NDArrayTraits<DT, SF, SR...>>::res
     static_assert(dim_product::result == container_type::dimension_product::result, "Error! Reshape must have same dimension product!");
     return StaticNDArray<DT, FD, RD...>(_data);
     //tmp._dim_sizes = nano::runtime_converter<dim_sizes>::to_array();
+}
+
+// TODO: recursive to dump it like numpy.
+template <typename DT, size_t SF, size_t... SR>
+std::ostream& operator << (std::ostream& os, const NDArrayInterface<NDArrayTraits<DT, SF, SR...>> &Array) {
+    size_t total_size = Array.size();
+    size_t last_dim = Array.dim_size(sizeof...(SR));
+    for(size_t i = 0; i < total_size/last_dim; ++i) {
+        for(size_t j = 0; j < last_dim; ++j) {
+            if(j == last_dim - 1) {
+                os << Array[i * last_dim + j] << '\n';
+            } else {
+                os << Array[i * last_dim + j] << ",\t";
+            }
+        }
+    }
+    return os;
 }
 
 } // end of namespace ndarray

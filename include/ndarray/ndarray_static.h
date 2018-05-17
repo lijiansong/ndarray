@@ -18,6 +18,8 @@ class NDArrayInterface;
 //  - SF = size of first dimension
 //  - SR = size of other dimensions
 
+// TODO: wraper single dim Vector and 2-dim Matrix
+
 template <typename DT, size_t SF, size_t... SR>
 using StaticNDArray = NDArrayInterface<NDArrayTraits<DT, SF, SR...>>;
 

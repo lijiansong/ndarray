@@ -3,7 +3,11 @@
  
  ## Usage
  Examples and test cases see [examples](./examples) directory, for more details, see <https://lijiansong.github.io/ndarray/>
- 
+
+ ## TODO
+ - [ ] Wrapper Vector and Matrix for NDArray.
+ - [ ] dynamic NDArray supporting.
+
  ## References
  - Eigen Tensor: <https://bitbucket.org/eigen/>
  - Tiny meta programming library: <https://github.com/ericniebler/meta>

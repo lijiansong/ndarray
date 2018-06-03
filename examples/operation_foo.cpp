@@ -10,6 +10,7 @@
 #endif
 
 #include <boost/test/unit_test.hpp>
+#include <iostream>
 
 #include "ndarray/ndarray.h"
 
@@ -46,12 +47,12 @@ BOOST_AUTO_TEST_CASE(NDarraySub) {
   BOOST_CHECK(C.size() == 4);
   BOOST_CHECK(D.size() == 4);
   BOOST_CHECK(C[0] == -1);
-  BOOST_CHECK(D(0, 0, 0) == -1);
   BOOST_CHECK(C[1] == -2);
-  BOOST_CHECK(D(1, 0, 0) == -2);
   BOOST_CHECK(C[2] == -3);
-  BOOST_CHECK(D(0, 1, 0) == -3);
   BOOST_CHECK(C[3] == -4);
+  BOOST_CHECK(D(0, 0, 0) == -1);
+  BOOST_CHECK(D(0, 1, 0) == -2);
+  BOOST_CHECK(D(1, 0, 0) == -3);
   BOOST_CHECK(D(1, 1, 0) == -4);
 }
 
@@ -63,8 +64,8 @@ BOOST_AUTO_TEST_CASE(NDarrayMul) {
   BOOST_CHECK(C.rank() == 3);
   BOOST_CHECK(C[0] == 1);
   BOOST_CHECK(C(0, 0, 0) == 1);
-  BOOST_CHECK(C(0, 1, 0) == 9);
-  BOOST_CHECK(C(1, 0, 0) == 4);
+  BOOST_CHECK(C(0, 1, 0) == 4);
+  BOOST_CHECK(C(1, 0, 0) == 9);
   BOOST_CHECK(C(1, 1, 0) == 16);
 }
 
@@ -134,12 +135,15 @@ BOOST_AUTO_TEST_CASE(NDarrayReshape) {
   BOOST_CHECK(A[3] == 4);
   BOOST_CHECK(A[4] == 5);
   BOOST_CHECK(A[5] == 6);
-  BOOST_CHECK(A(0, 0, 0) == 1);
-  BOOST_CHECK(A(0, 0, 1) == 3);
-  BOOST_CHECK(A(0, 0, 2) == 5);
-  BOOST_CHECK(A(0, 1, 0) == 2);
-  BOOST_CHECK(A(0, 1, 1) == 4);
-  BOOST_CHECK(A(0, 1, 2) == 6);
+  std::cout << A(0, 1, 0) << std::endl;
+  std::cout << A(0, 1, 1) << std::endl;
+  std::cout << A(0, 1, 2) << std::endl;
+  BOOST_CHECK(A(0, 0, 0) == A[0]);
+  BOOST_CHECK(A(0, 0, 1) == A[1]);
+  BOOST_CHECK(A(0, 0, 2) == A[2]);
+  BOOST_CHECK(A(0, 1, 0) == A[3]);
+  BOOST_CHECK(A(0, 1, 1) == A[4]);
+  BOOST_CHECK(A(0, 1, 2) == A[5]);
 
   auto B = A.reshape<3, 2>();
   auto dim_sizes_b = B.dim_sizes();
@@ -157,10 +161,10 @@ BOOST_AUTO_TEST_CASE(NDarrayReshape) {
   BOOST_CHECK(B[4] == 5);
   BOOST_CHECK(B[5] == 6);
   BOOST_CHECK(B(0, 0) == 1);
-  BOOST_CHECK(B(0, 1) == 4);
-  BOOST_CHECK(B(1, 0) == 2);
-  BOOST_CHECK(B(1, 1) == 5);
-  BOOST_CHECK(B(2, 0) == 3);
+  BOOST_CHECK(B(0, 1) == 2);
+  BOOST_CHECK(B(1, 0) == 3);
+  BOOST_CHECK(B(1, 1) == 4);
+  BOOST_CHECK(B(2, 0) == 5);
   BOOST_CHECK(B(2, 1) == 6);
 }
 

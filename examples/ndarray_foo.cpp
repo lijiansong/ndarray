@@ -98,11 +98,18 @@ BOOST_AUTO_TEST_CASE(NDarrayElementAccess) {
   BOOST_CHECK(A[5] == 6.f);
 
   BOOST_CHECK(A(0, 0) == 1.f);
-  BOOST_CHECK(A(0, 1) == 4.f);
-  BOOST_CHECK(A(1, 0) == 2.f);
-  BOOST_CHECK(A(1, 1) == 5.f);
-  BOOST_CHECK(A(2, 0) == 3.f);
+  BOOST_CHECK(A(0, 1) == 2.f);
+  BOOST_CHECK(A(1, 0) == 3.f);
+  BOOST_CHECK(A(1, 1) == 4.f);
+  BOOST_CHECK(A(2, 0) == 5.f);
   BOOST_CHECK(A(2, 1) == 6.f);
+
+  BOOST_CHECK(A(0, 0) == A[0]);
+  BOOST_CHECK(A(0, 1) == A[1]);
+  BOOST_CHECK(A(1, 0) == A[2]);
+  BOOST_CHECK(A(1, 1) == A[3]);
+  BOOST_CHECK(A(2, 0) == A[4]);
+  BOOST_CHECK(A(2, 1) == A[5]);
 
   A[3] = 3.99f;
   BOOST_CHECK(A[3] == 3.99f);

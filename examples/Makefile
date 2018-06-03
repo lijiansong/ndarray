@@ -9,8 +9,8 @@ NDARRAY := ndarray
 TEST_ALL := test_all
 
 # Compiler
-CXX := clang++
-#CXX := g++
+#CXX := clang++
+CXX := g++
 
 # Compiler flags
 CXX_FLAGS := -std=c++11 -w

@@ -16,7 +16,7 @@
 BOOST_AUTO_TEST_SUITE(NDArrayTraits)
 
 BOOST_AUTO_TEST_CASE(NDarrayTraitsBasic) {
-  using traits = ndarray::NDArrayTraits<int, 4, 8>;
+  using traits = ndarray::NDArrayTraits<int, 1, 1, 4, 8>;
   traits::container_type A;
   BOOST_CHECK(A.size() == 32);
 }

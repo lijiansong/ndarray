@@ -13,7 +13,7 @@
 #include <vector>
 #include <boost/test/unit_test.hpp>
 
-#include "ndarray/ndarray_container.h"
+#include "ndarray_container.h"
 
 BOOST_AUTO_TEST_SUITE(NDArrayConatiner)
 

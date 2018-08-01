@@ -11,7 +11,7 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include "ndarray/ndarray_traits.h"
+#include "ndarray_traits.h"
 
 BOOST_AUTO_TEST_SUITE(NDArrayTraits)
 

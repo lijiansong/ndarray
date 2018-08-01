@@ -7,6 +7,7 @@ OPERATOR := operation
 TRAITS := traits
 NDARRAY := ndarray
 TEST_ALL := test_all
+FOO := foo
 
 # Compiler
 #CXX := clang++
@@ -17,7 +18,6 @@ CXX_FLAGS := -std=c++11 -w
 DEBUG_FLAGS := SEPARATE_TEST
 
 # Include directories
-NANO_INC := ../third_party/
 ND_INC := ../include
 
 # Boost unit test library
@@ -43,20 +43,26 @@ container: CXX_FLAGS += -D$(DEBUG_FLAGS)
 container: container_foo.o
 	$(CXX) -o $(CONTAINER) $+ $(BOOST_LIB)
 
+foo: foo.o
+	$(CXX) -o $(FOO) $+
+
 test_all.o: test_all.cpp
-	$(CXX) -I $(ND_INC) -I $(NANO_INC) $(CXX_FLAGS) -o $@ -c $<
+	$(CXX) -I $(ND_INC) $(CXX_FLAGS) -o $@ -c $<
 
 ndarray_foo.o: ndarray_foo.cpp
-	$(CXX) -I $(ND_INC) -I $(NANO_INC) $(CXX_FLAGS) -o $@ -c $<
+	$(CXX) -I $(ND_INC) $(CXX_FLAGS) -o $@ -c $<
+
+foo.o: foo.cpp
+	$(CXX) -I $(ND_INC) $(CXX_FLAGS) -o $@ -c $<
 
 container_foo.o: container_foo.cpp
-	$(CXX) -I $(ND_INC) -I $(NANO_INC) $(CXX_FLAGS) -o $@ -c $<
+	$(CXX) -I $(ND_INC) $(CXX_FLAGS) -o $@ -c $<
 
 operation_foo.o: operation_foo.cpp
-	$(CXX) -I $(ND_INC) -I $(NANO_INC) $(CXX_FLAGS) -o $@ -c $<
+	$(CXX) -I $(ND_INC) $(CXX_FLAGS) -o $@ -c $<
 
 traits_foo.o: traits_foo.cpp
-	$(CXX) -I $(ND_INC) -I $(NANO_INC) $(CXX_FLAGS) -o $@ -c $<
+	$(CXX) -I $(ND_INC) $(CXX_FLAGS) -o $@ -c $<
 
 clean:
 	@rm -rf *.ll
@@ -67,3 +73,4 @@ clean:
 	@rm -rf $(OPERATOR)
 	@rm -rf $(TRAITS)
 	@rm -rf $(TEST_ALL)
+	@rm -rf $(FOO)

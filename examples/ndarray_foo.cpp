@@ -13,7 +13,7 @@
 #include <iostream>
 #include <vector>
 
-#include "ndarray/ndarray.h"
+#include "ndarray.h"
 
 BOOST_AUTO_TEST_SUITE(NDArrayTestCases)
 

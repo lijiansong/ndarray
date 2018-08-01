@@ -12,7 +12,7 @@
 #include <boost/test/unit_test.hpp>
 #include <iostream>
 
-#include "ndarray/ndarray.h"
+#include "ndarray.h"
 
 BOOST_AUTO_TEST_SUITE(NDArrayOperationsTest)
 
@@ -328,6 +328,15 @@ BOOST_AUTO_TEST_CASE(NDarrayReshape) {
   BOOST_CHECK(C[3] == 4);
   BOOST_CHECK(C[4] == 5);
   BOOST_CHECK(C[5] == 6);
+  BOOST_CHECK(C(0, 0, 0) == 1);
+  BOOST_CHECK(C(0, 0, 1) == 2);
+  BOOST_CHECK(C(0, 0, 2) == 3);
+  BOOST_CHECK(C(0, 1, 0) == 4);
+  BOOST_CHECK(C(0, 1, 1) == 5);
+  BOOST_CHECK(C(0, 1, 2) == 6);
+  std::cout << C(0, 0, 0) << std::endl;
+  std::cout << C(0, 0, 1) << std::endl;
+  std::cout << C(0, 0, 2) << std::endl;
   std::cout << C(0, 1, 0) << std::endl;
   std::cout << C(0, 1, 1) << std::endl;
   std::cout << C(0, 1, 2) << std::endl;

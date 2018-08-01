@@ -1,7 +1,7 @@
 #ifndef NDARRAY_CONTAINER_H
 #define NDARRAY_CONTAINER_H
 
-#include "meta/nano.hpp"
+#include "third_party/meta/nano.hpp"
 #include <array>
 
 namespace ndarray {
@@ -14,8 +14,8 @@ class NDArrayContainer;
 //  - SF = size of first dimension
 //  - SR = size of other dimensions
 
-// static containers
-template <typename DT, size_t SF, size_t... SR>
+// static container
+template <typename DT, std::size_t SF, std::size_t... SR>
 class NDArrayContainer<DT, SF, SR...> {
 public:
     // ---------------------------------------- ALIAS'S -----------------------------------------------------
@@ -35,17 +35,49 @@ public:
     template <typename... TR> 
     constexpr NDArrayContainer(TR&&... values) : _data{{std::forward<TR>(values)...}} {}
 
-    constexpr size_t size() const { return dimension_product::result; }
+    constexpr std::size_t size() const { return dimension_product::result; }
     
-    inline data_type& operator[](size_t i) { return _data[i]; }
+    inline data_type& operator[](std::size_t i) { return _data[i]; }
 
-    inline const data_type& operator[](size_t i) const { return _data[i]; }
+    inline const data_type& operator[](std::size_t i) const { return _data[i]; }
 
     iterator begin() { return _data.begin(); }
 
     iterator end() { return _data.end(); }
+
 private:
     data_container _data;
+};
+
+// dynamic container
+template <typename DT>
+class NDArrayContainer<DT> {
+public:
+    // ---------------------------------------- ALIAS'S -----------------------------------------------------
+    using data_type = DT;
+    using data_container = std::vector<data_type>;
+    using size_type = typename data_container::size_type;
+    using dim_container = std::vector<size_type>;
+    using iterator = typename data_container::iterator;
+    // ------------------------------------------------------------------------------------------------------
+
+    NDArrayContainer() : _size(0), _data(0) {}
+
+    NDArrayContainer(data_container& data) : _size(data.size()), _data(data){}
+
+    inline std::size_t size() const { return _size; }
+
+    inline data_type& operator[](std::size_t i) { return _data[i]; }
+
+    inline const data_type& operator[](std::size_t i) const { return _data[i]; }
+
+    iterator begin() { return _data.begin(); }
+
+    iterator end() { return _data.end(); }
+
+private:
+    data_container _data;
+    std::size_t _size;
 };
 
 } // end of namespace ndarray

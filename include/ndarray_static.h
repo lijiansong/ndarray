@@ -18,7 +18,7 @@ class NDArrayInterface;
 //  - SF = size of first dimension
 //  - SR = size of other dimensions
 
-// TODO: wraper single dim Vector and 2-dim Matrix
+// TODO: wraper single dim Vector and 2 dim Matrix
 
 template <typename DT, size_t SF, size_t... SR>
 using StaticNDArray = NDArrayInterface<NDArrayTraits<DT, SF, SR...>>;
@@ -43,8 +43,8 @@ public:
     template <typename... TR>
     NDArrayInterface(DT&& first_value, TR&&... other_values);
 
-    template <typename Expression, typename Traits>
-    NDArrayInterface(const NDArrayExpr<Expression, Traits>& expression);
+    template <typename Expr, typename Traits>
+    NDArrayInterface(const NDArrayExpr<Expr, Traits>& expr);
     
     constexpr size_type rank() const { return sizeof...(SR) + 1; }
     
@@ -61,10 +61,10 @@ public:
     inline const data_type& operator[](size_type i) const { return _data[i]; }
    
     template <typename IF, typename... IR>
-    DT& operator()(IF index_dim_one, IR... index_dim_other);
+    DT& operator()(IF dim_index_first, IR... dim_index_rest);
    
     template <typename IF, typename... IR>
-    DT operator()(IF index_dim_one, IR... index_dim_other) const;
+    DT operator()(IF dim_index_first, IR... dim_index_rest) const;
 
     DT sum();
 
@@ -80,8 +80,6 @@ private:
     data_container _data; // Data container which holds all the data
     dim_container _dim_sizes; // Sizes of the dimensions
 };
-
-// ----------------------------------------------- IMPL -----------------------------------------------------
 
 template <typename DT, size_t SF, size_t...SR>
 NDArrayInterface<NDArrayTraits<DT, SF, SR...>>::NDArrayInterface() {
@@ -101,30 +99,30 @@ NDArrayInterface<NDArrayTraits<DT, SF, SR...>>::NDArrayInterface(DT&& first_valu
 }
 
 template <typename DT, size_t SF, size_t...SR> template <typename E, typename T> 
-NDArrayInterface<NDArrayTraits<DT, SF, SR...>>::NDArrayInterface(const NDArrayExpr<E, T>& expression) {
+NDArrayInterface<NDArrayTraits<DT, SF, SR...>>::NDArrayInterface(const NDArrayExpr<E, T>& expr) {
     // Convert the nano::list of dimension sizes to a constant array
     _dim_sizes = nano::runtime_converter<typename container_type::dimension_sizes>::to_array();
-    for (size_type i = 0; i != size(); ++i) _data[i] = expression[i];
+    for (size_type i = 0; i != size(); ++i) _data[i] = expr[i];
 }
 
 template <typename DT, size_t SF, size_t... SR>
 void NDArrayInterface<NDArrayTraits<DT, SF, SR...>>::initialize(const data_type min, const data_type max) {
-    std::random_device rand_device;
-    std::mt19937 gen(rand_device());
+    std::random_device rd;
+    std::mt19937 gen(rd());
     std::uniform_real_distribution<> dist(min, max);
-    for (auto& element : _data) element = static_cast<data_type>(dist(gen));
+    for (auto& elem : _data) elem = static_cast<data_type>(dist(gen));
 }
 
 template <typename DT, size_t SF, size_t...SR> template <typename IF, typename... IR>
-DT& NDArrayInterface<NDArrayTraits<DT, SF, SR...>>::operator()(IF dim_one_index, IR... other_dim_indices) {
+DT& NDArrayInterface<NDArrayTraits<DT, SF, SR...>>::operator()(IF dim_index_first, IR... dim_index_rest) {
     using dimension_sizes = typename container_type::dimension_sizes;
-    return _data[StaticMapper::indices_to_index<dimension_sizes>(dim_one_index, other_dim_indices...)];
+    return _data[StaticIndexMapper::indices_to_index<dimension_sizes>(dim_index_first, dim_index_rest...)];
 }
 
 template <typename DT, size_t SF, size_t...SR> template <typename IF, typename... IR>
-DT NDArrayInterface<NDArrayTraits<DT, SF, SR...>>::operator()(IF dim_one_index, IR... other_dim_indices) const {
+DT NDArrayInterface<NDArrayTraits<DT, SF, SR...>>::operator()(IF dim_index_first, IR... dim_index_rest) const {
     using dimension_sizes = typename container_type::dimension_sizes;
-    return _data[StaticMapper::indices_to_index<dimension_sizes>(dim_one_index, other_dim_indices...)];
+    return _data[StaticIndexMapper::indices_to_index<dimension_sizes>(dim_index_first, dim_index_rest...)];
 }
 
 template <typename DT, size_t SF, size_t... SR>

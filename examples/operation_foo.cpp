@@ -260,6 +260,7 @@ BOOST_AUTO_TEST_CASE(NDarrayGlobalReduction) {
 }
 
 BOOST_AUTO_TEST_CASE(NDarrayReshape) {
+  // static NDArray
   ndarray::NDArray<int, 1, 2, 3> A{1, 2, 3, 4, 5, 6};
   auto dim_sizes_a = A.dim_sizes();
   BOOST_CHECK(dim_sizes_a[0] == 1);
@@ -307,6 +308,51 @@ BOOST_AUTO_TEST_CASE(NDarrayReshape) {
   BOOST_CHECK(B(1, 1) == 4);
   BOOST_CHECK(B(2, 0) == 5);
   BOOST_CHECK(B(2, 1) == 6);
+
+  // dynamic NDArray
+  std::vector<size_t> dim{1, 2, 3};
+  std::vector<int> data{1, 2, 3, 4, 5, 6};
+  ndarray::NDArray<int> C(dim, data);
+  auto dim_sizes_c = C.dim_sizes();
+  BOOST_CHECK(dim_sizes_c[0] == 1);
+  BOOST_CHECK(dim_sizes_c[1] == 2);
+  BOOST_CHECK(dim_sizes_c[2] == 3);
+  BOOST_CHECK(C.dim_size(0) == 1);
+  BOOST_CHECK(C.dim_size(1) == 2);
+  BOOST_CHECK(C.dim_size(2) == 3);
+  BOOST_CHECK(C.rank() == 3);
+  BOOST_CHECK(C.size() == 6);
+  BOOST_CHECK(C[0] == 1);
+  BOOST_CHECK(C[1] == 2);
+  BOOST_CHECK(C[2] == 3);
+  BOOST_CHECK(C[3] == 4);
+  BOOST_CHECK(C[4] == 5);
+  BOOST_CHECK(C[5] == 6);
+  std::cout << C(0, 1, 0) << std::endl;
+  std::cout << C(0, 1, 1) << std::endl;
+  std::cout << C(0, 1, 2) << std::endl;
+
+  auto D = C.reshape<3, 2>();
+  auto dim_sizes_d = D.dim_sizes();
+  BOOST_CHECK(dim_sizes_d[0] == 3);
+  BOOST_CHECK(dim_sizes_d[1] == 2);
+
+  BOOST_CHECK(D.dim_size(0) == 3);
+  BOOST_CHECK(D.dim_size(1) == 2);
+  BOOST_CHECK(D.rank() == 2);
+  BOOST_CHECK(D.size() == 6);
+  BOOST_CHECK(D[0] == 1);
+  BOOST_CHECK(D[1] == 2);
+  BOOST_CHECK(D[2] == 3);
+  BOOST_CHECK(D[3] == 4);
+  BOOST_CHECK(D[4] == 5);
+  BOOST_CHECK(D[5] == 6);
+  BOOST_CHECK(D(0, 0) == 1);
+  BOOST_CHECK(D(0, 1) == 2);
+  BOOST_CHECK(D(1, 0) == 3);
+  BOOST_CHECK(D(1, 1) == 4);
+  BOOST_CHECK(D(2, 0) == 5);
+  BOOST_CHECK(D(2, 1) == 6);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

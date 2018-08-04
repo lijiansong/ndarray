@@ -20,7 +20,8 @@ NDArray provides both static and dynamic containers. Here, `static ndarray` mean
 Here is some code snippets of NDArray:
 
 ```
-// 1. NDArray construction and builtin functions
+// Static NDArray
+// 1. Static NDArray construction and builtin functions
 using static_ndarray = ndarray::NDArray<int, 48, 3, 32, 32>;
 static_ndarray _A;
 auto dim_sizes_a = _A.dim_sizes();
@@ -103,6 +104,26 @@ K(5);             // 6
 // 6. slice
 ...
 
+// Dynamic NDArray
+// 7. Dynamic NDArray construction and builtin functions
+ndarray::NDArray<int> B(3);
+B.rank(); // 3
+ndarray::NDArray<int> C{32, 7, 32, 48};
+auto dim_sizes_c = C.dim_sizes();
+dim_sizes_c[0]; // 32
+dim_sizes_c[1]; // 7
+dim_sizes_c[2]; // 32
+dim_sizes_c[3]; // 48
+C.dim_size(0); // 32
+C.dim_size(1); // 7
+C.dim_size(2); // 32
+C.dim_size(3); // 48
+C.rank(); // 4
+C.size(); // 32 * 7 * 32 * 48
+
+// 8. Other expressions for dynamic NDarray is similar to static NDArray
+...
+
 ```
 
 For more examples, please checkout its [test suites](https://github.com/lijiansong/ndarray/tree/master/examples)
@@ -114,6 +135,6 @@ Notice: if you want to build the test cases in the [examples](https://github.com
 
 ## 4. Post Script
 
-The long term goal of NDArray is to develop something that is like numpy library. But with feature support that any ranks of NDArray can be run in CPU, GPU or some ASIC platforms.
+The long term goal of NDArray is to provide numpy style tensor expressions, but with feature support that any ranks of NDArray can be run in CPU, GPU or some ASIC platforms.
 
-Notice: NDArray is under development, now it only supports static NDArray, dynamic NDArray will be posted later.
+Notice: NDArray is under development.

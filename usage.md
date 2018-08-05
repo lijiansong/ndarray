@@ -5,32 +5,49 @@ title: NDArray Usage
 
 ## 1. NDArray Construction
 
-Static NDArray is a template interface, as defined below:
+`Static NDArray` is a template interface, as defined below:
 ```
 template <typename DT, size_t SF, size_t... SR>
 using StaticNDArray = NDArrayInterface<NDArrayTraits<DT, SF, SR...>>;
 ```
 
-There are many ways to construct a NDArray, here is its constructors:
+There are many ways to construct a static NDArray, its constructors are shown below:
 
 ```
 // 1. default constructor
 NDArrayInterface();
 
-// 2. construct a NDArray from a std::array
+// 2. construct a static NDArray from a std::array
 NDArrayInterface(data_container& data);
 
 // 3. initialize list
 template <typename... TR>
 NDArrayInterface(DT&& first_value, TR&&... other_values);
 
-// 4. construct a NDArray from NDarray expression
-template <typename Expression, typename Traits>
-NDArrayInterface(const NDArrayExpr<Expression, Traits>& expression);
+// 4. construct a static NDArray from NDarray expression
+template <typename Expr, typename Traits>
+NDArrayInterface(const NDArrayExpr<Expr, Traits>& expr);
+```
+
+While to construct a dynamic NDArray, you can use the following constructors:
+
+```
+// 1. constructor a dynamic ndarray with a rank 
+NDArrayInterface(size_type rank) : _data(0), _rank(rank), _dim_sizes(rank) {}
+
+// 2. construct a dynamic ndarray with a vector of dimension and data
+NDArrayInterface(dim_container& dim_sizes, data_container& data);
+
+// 3. construct a dynamic ndarray with an initialize list to specify its dimension info
+NDArrayInterface(std::initializer_list<size_type> dim_sizes);
+
+// 4. construct a dynamic NDArray from NDarray expressions
+template <typename Expr, typename Traits>
+NDArrayInterface(const NDArrayExpr<Expr, Traits>& expr);
 ```
 
 ## 2. NDArray Builtin Functions
-NDArray has some builtin fucntions to get the info about the NDArray instance.
+NDArray has some builtin fucntions to get the information about the NDArray instance. Both static and dynamic NDArray share the following interfaces.
 
 ```
 // 1. rank(), get the total dimension of a NDArray
@@ -39,11 +56,15 @@ constexpr size_type rank() const;
 // 2. size(), get the total number of elements in a NDArray
 constexpr size_type size() const;
 
-// 3. dim_sizes(), get the dimension array of a NDArray, it return a std::array
+// 3. dim_sizes(), get the dimension array of a NDArray, for static NDArray it return a std::array, while for dynamic NDArray, it returns a std::vector
 constexpr const dim_container& dim_sizes() const;
 
 // 4. dim_size(const size_type), get the size of the given index dimension of a NDarray
 inline size_type dim_size(const size_type dim_index) const;
+
+// 5. data(), get the data of a NDArray, for static NDArray, it returns a std::array, while for dynamic NDArray, it returns a std::vector
+const data_container& data() const { return _data; }
+
 ```
 
 ## 3. NDArray Element Access

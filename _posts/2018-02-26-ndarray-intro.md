@@ -105,7 +105,7 @@ K(5);             // 6
 ...
 
 // Dynamic NDArray
-// 7. Dynamic NDArray construction and builtin functions
+// 7. Dynamic NDArray constructor and builtin functions
 ndarray::NDArray<int> B(3);
 B.rank(); // 3
 ndarray::NDArray<int> C{32, 7, 32, 48};
@@ -120,6 +120,26 @@ C.dim_size(2); // 32
 C.dim_size(3); // 48
 C.rank(); // 4
 C.size(); // 32 * 7 * 32 * 48
+
+std::vector<size_t> dim_size{1, , 1, 2, 3};
+std::vector<float> data{1.f, 2.f, 3.f, 4.f, 5.f, 6.f};
+ndarray::NDArray<float> D(dim_size, data);
+auto d_data = D.data();
+auto dim = D.dim_sizes();
+D.rank(); // 3
+D.size(); // 6
+D.dim_size(0); // 1
+D.dim_size(1); // 2
+D.dim_size(2); // 3
+dim[0]; // 1
+dim[1]; // 2
+dim[2]; // 3
+d_data[0]; // 1.f
+d_data[1]; // 2.f
+d_data[2]; // 3.f
+d_data[3]; // 4.f
+d_data[4]; // 5.f
+d_data[5]; // 6.f
 
 // 8. Other expressions for dynamic NDarray is similar to static NDArray
 ...

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      NDArray Usage &middot; NDArray:  
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/ndarray/public/css/poole.css">
+  <link rel="stylesheet" href="/ndarray/public/css/syntax.css">
+  <link rel="stylesheet" href="/ndarray/public/css/lanyon.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|PT+Sans:400">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/ndarray/public/ndarray.png">
+  <link rel="shortcut icon" href="/ndarray/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/ndarray/atom.xml">
+</head>
+
+
+
+  <!--<body class="theme-base-0c sidebar-overlay">-->
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox" checked>
+     <!--<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox" >-->
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <div class="sidebar-personal-info">
+      <div class="sidebar-personal-info-section">
+        <a href="https://en.gravatar.com/userimage/108884328/305cd61d740028c3029fc27e16eaaf0e.png?size=200">
+          <img src="https://en.gravatar.com/userimage/108884328/305cd61d740028c3029fc27e16eaaf0e.png?size=200" title="View on Gravatar" alt="View on Gravatar" />
+        </a>
+      </div>
+      <div class="sidebar-personal-info-section">
+        <p>NDArray is a headers only C++11 template library for N dimensions tensor expressions.</p>
+      </div>
+      
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/ndarray">Home</a>
+
+    
+
+
+    
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/ndarray/ndarray_api/">API Documention</a>
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item active" href="/ndarray/usage/">NDArray Usage</a>
+        
+      
+    
+
+    <a class="sidebar-nav-item" href="https://github.com/lijiansong/ndarray">GitHub Project</a>
+    <a class="sidebar-nav-item" href="https://github.com/lijiansong/ndarray/archive/master.zip">Download</a>
+    <span class="sidebar-nav-item">Currently v1.0.0</span>
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+    Theme powered by <a href="http://jekyllrb.com">jekyll</a> and <a href="http://github.com/poole">Poole</a>
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+          <h3 class="masthead-title">
+            <a href="/ndarray" title="Home">NDArray:  </a>
+            <small>A headers only template library based on meta programming</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="page">
+  <h1 class="page-title">NDArray Usage</h1>
+  <h2 id="1-ndarray-construction">1. NDArray Construction</h2>
+
+<p><code>Static NDArray</code> is a template interface, as defined below:</p>
+<pre><code>template &lt;typename DT, size_t SF, size_t... SR&gt;
+using StaticNDArray = NDArrayInterface&lt;NDArrayTraits&lt;DT, SF, SR...&gt;&gt;;
+</code></pre>
+
+<p>There are many ways to construct a static NDArray, its constructors are shown below:</p>
+
+<pre><code>// 1. default constructor
+NDArrayInterface();
+
+// 2. construct a static NDArray from a std::array
+NDArrayInterface(data_container&amp; data);
+
+// 3. initialize list
+template &lt;typename... TR&gt;
+NDArrayInterface(DT&amp;&amp; first_value, TR&amp;&amp;... other_values);
+
+// 4. construct a static NDArray from NDarray expression
+template &lt;typename Expr, typename Traits&gt;
+NDArrayInterface(const NDArrayExpr&lt;Expr, Traits&gt;&amp; expr);
+</code></pre>
+
+<p>While to construct a dynamic NDArray, you can use the following constructors:</p>
+
+<pre><code>// 1. constructor a dynamic ndarray with a rank 
+NDArrayInterface(size_type rank) : _data(0), _rank(rank), _dim_sizes(rank) {}
+
+// 2. construct a dynamic ndarray with a vector of dimension and data
+NDArrayInterface(dim_container&amp; dim_sizes, data_container&amp; data);
+
+// 3. construct a dynamic ndarray with an initialize list to specify its dimension info
+NDArrayInterface(std::initializer_list&lt;size_type&gt; dim_sizes);
+
+// 4. construct a dynamic NDArray from NDarray expressions
+template &lt;typename Expr, typename Traits&gt;
+NDArrayInterface(const NDArrayExpr&lt;Expr, Traits&gt;&amp; expr);
+</code></pre>
+
+<h2 id="2-ndarray-builtin-functions">2. NDArray Builtin Functions</h2>
+<p>NDArray has some builtin fucntions to get the information about the NDArray instance. Both static and dynamic NDArray share the following interfaces.</p>
+
+<pre><code>// 1. rank(), get the total dimension of a NDArray
+constexpr size_type rank() const;
+
+// 2. size(), get the total number of elements in a NDArray
+constexpr size_type size() const;
+
+// 3. dim_sizes(), get the dimension array of a NDArray, for static NDArray it return a std::array, while for dynamic NDArray, it returns a std::vector
+constexpr const dim_container&amp; dim_sizes() const;
+
+// 4. dim_size(const size_type), get the size of the given index dimension of a NDarray
+inline size_type dim_size(const size_type dim_index) const;
+
+// 5. data(), get the data of a NDArray, for static NDArray, it returns a std::array, while for dynamic NDArray, it returns a std::vector
+const data_container&amp; data() const { return _data; }
+
+</code></pre>
+
+<h2 id="3-ndarray-element-access">3. NDArray Element Access</h2>
+<p>There are two ways to access a NDArray element, one is by <code>[]</code> operator with a index which similar to access an one dimension array, another is by the <code>(i, j, k, ...)</code> operator to get the element at the given position.</p>
+
+<pre><code>// 1. [], get the i-th element in a NDArray
+inline const data_type&amp; operator[](size_type i);
+
+// 2. (i, j, k, ...), get the a NDArray element at the position (i, j, k, ...)
+template &lt;typename IF, typename... IR&gt;
+DT&amp; operator()(IF index_dim_one, IR... index_dim_other);
+</code></pre>
+
+<h2 id="4-ndarray-operations">4. NDArray Operations</h2>
+<p>NDArray supports arithmatic operations, e.g. addition, subtraction, multiplication and etc. Besides, it also supports global reduction, local reduction, slice, reshape and etc.</p>
+
+<pre><code>// 1. +, NDArray addition
+template &lt;typename E1, typename E2, typename T1, typename T2&gt;
+const ndarray::NDArrayAddition&lt;E1, E2, T1, T2&gt; operator + (ndarray::NDArrayExpr&lt;E1, T1&gt; const&amp; x, ndarray::NDArrayExpr&lt;E2, T2&gt; const&amp; y)
+
+// 2. -, NDArray subtraction
+template &lt;typename E1, typename E2, typename T1, typename T2&gt;
+const ndarray::NDArraySubtraction&lt;E1, E2, T1, T2&gt; operator - (ndarray::NDArrayExpr&lt;E1, T1&gt; const&amp; x, ndarray::NDArrayExpr&lt;E2, T2&gt; const&amp; y)
+
+// 3. *, NDArray multiplication
+template &lt;typename E1, typename E2, typename T1, typename T2&gt;
+const ndarray::NDArrayMultiplication&lt;E1, E2, T1, T2&gt; operator * (ndarray::NDArrayExpr&lt;E1, T1&gt; const&amp; x, ndarray::NDArrayExpr&lt;E2, T2&gt; const&amp; y)
+
+// 4. global reduction: sum(), get the total sumary of a NDArray
+DT sum();
+
+// 5. global reduction: max(), get the maximum value of a NDArray
+DT max();
+
+// 6. global reduction: min(), get the minimum value of a NDArray
+DT min();
+
+// 7. reshape(), reshape a NDArray with new dimensions
+template &lt;size_t FD, size_t... RD&gt;
+StaticNDArray&lt;DT, FD, RD...&gt; reshape();
+</code></pre>
+
+<p>More details about the NDArray usage, please checkout NDArray <a href="https://github.com/lijiansong/ndarray/tree/master/examples">test cases</a>.</p>
+
+</div>
+
+      </div>
+    </div>
+
+  </body>
+</html>

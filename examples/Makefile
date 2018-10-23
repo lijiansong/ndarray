@@ -6,6 +6,7 @@ CONTAINER := container
 OPERATOR := operation
 TRAITS := traits
 NDARRAY := ndarray
+VECTOR := vector
 TEST_ALL := test_all
 FOO := foo
 
@@ -24,12 +25,16 @@ ND_INC := ../include
 BOOST_LIB := -lboost_unit_test_framework
 
 # Rules
-test: ndarray_foo.o traits_foo.o operation_foo.o container_foo.o test_all.o
+test: ndarray_foo.o vector_foo.o traits_foo.o operation_foo.o container_foo.o test_all.o
 	$(CXX) -o $(TEST_ALL) $+ $(BOOST_LIB)
 
 ndarray: CXX_FLAGS += -D$(DEBUG_FLAGS)
 ndarray: ndarray_foo.o
 	$(CXX) -o $(NDARRAY) $+ $(BOOST_LIB)
+
+vector: CXX_FLAGS += -D$(DEBUG_FLAGS)
+vector: vector_foo.o
+	$(CXX) -o $(VECTOR) $+ $(BOOST_LIB)
 
 traits: CXX_FLAGS += -D$(DEBUG_FLAGS)
 traits: traits_foo.o
@@ -52,6 +57,9 @@ test_all.o: test_all.cpp
 ndarray_foo.o: ndarray_foo.cpp
 	$(CXX) -I $(ND_INC) $(CXX_FLAGS) -o $@ -c $<
 
+vector_foo.o: vector_foo.cpp
+	$(CXX) -I $(ND_INC) $(CXX_FLAGS) -o $@ -c $<
+
 foo.o: foo.cpp
 	$(CXX) -I $(ND_INC) $(CXX_FLAGS) -o $@ -c $<
 
@@ -70,6 +78,7 @@ clean:
 	@rm -rf *.o
 	@rm -rf $(CONTAINER)
 	@rm -rf $(NDARRAY)
+	@rm -rf $(VECTOR)
 	@rm -rf $(OPERATOR)
 	@rm -rf $(TRAITS)
 	@rm -rf $(TEST_ALL)

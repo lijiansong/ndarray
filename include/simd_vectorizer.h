@@ -23,6 +23,7 @@ template <typename T> struct scalar_inst_set {
     return val;
   }
 
+  // binary op
   template <typename T2, typename tag> struct binary_op {};
 
   template <typename T2> struct binary_op<T2, add_op> {
@@ -35,6 +36,17 @@ template <typename T> struct scalar_inst_set {
 
   template <class tag> static pack_type binary(pack_type a, pack_type b) {
     return binary_op<pack_type, tag>()(a, b);
+  }
+
+  // unary op
+
+  template <typename T2, typename tag> struct unary_op {};
+  template <typename T2> struct unary_op<T2, sqrt_op> {
+    T2 operator()(T2 a) { return std::sqrt(a); }
+  };
+
+  template <class tag> static pack_type unary(pack_type a) {
+    return unary_op<pack_type, tag>()(a);
   }
 };
 
@@ -65,6 +77,7 @@ template <> struct vector_inst_set<float> {
     return val;
   }
 
+  // binary op
   template <typename T2, typename tag> struct binary_op {};
 
   template <typename T2> struct binary_op<T2, add_op> {
@@ -77,6 +90,16 @@ template <> struct vector_inst_set<float> {
 
   template <class tag> static pack_type binary(pack_type a, pack_type b) {
     return binary_op<pack_type, tag>()(a, b);
+  }
+
+  // unary op
+  template <typename T2, typename tag> struct unary_op {};
+  template <typename T2> struct unary_op<T2, sqrt_op> {
+    T2 operator()(T2 a) { return _mm256_sqrt_ps(a); }
+  };
+
+  template <class tag> static pack_type unary(pack_type a) {
+    return unary_op<pack_type, tag>()(a);
   }
 };
 
@@ -102,6 +125,7 @@ template <> struct vector_inst_set<double> {
     return val;
   }
 
+  // binary op
   template <typename T2, typename tag> struct binary_op {};
 
   template <typename T2> struct binary_op<T2, add_op> {
@@ -114,6 +138,16 @@ template <> struct vector_inst_set<double> {
 
   template <class tag> static pack_type binary(pack_type a, pack_type b) {
     return binary_op<pack_type, tag>()(a, b);
+  }
+
+  // unary op
+  template <typename T2, typename tag> struct unary_op {};
+  template <typename T2> struct unary_op<T2, sqrt_op> {
+    T2 operator()(T2 a) { return _mm256_sqrt_pd(a); }
+  };
+
+  template <class tag> static pack_type unary(pack_type a) {
+    return unary_op<pack_type, tag>()(a);
   }
 };
 #elif defined(__SSE2__)
@@ -139,6 +173,7 @@ template <> struct vector_inst_set<float> {
     return val;
   }
 
+  // binary op
   template <typename T2, typename tag> struct binary_op {};
 
   template <typename T2> struct binary_op<T2, add_op> {
@@ -151,6 +186,15 @@ template <> struct vector_inst_set<float> {
 
   template <class tag> static pack_type binary(pack_type a, pack_type b) {
     return binary_op<pack_type, tag>()(a, b);
+  }
+
+  // unary op
+  template <typename T2, typename tag> struct unary_op {};
+  template <typename T2> struct unary_op<T2, sqrt_op> {
+    T2 operator()(T2 a) { return _mm_sqrt_ps(a); }
+  };
+  template <class tag> static pack_type unary(pack_type a) {
+    return unary_op<pack_type, tag>()(a);
   }
 };
 
@@ -176,6 +220,7 @@ template <> struct vector_inst_set<double> {
     return val;
   }
 
+  // binary op
   template <typename T2, typename tag> struct binary_op {};
 
   template <typename T2> struct binary_op<T2, add_op> {
@@ -188,6 +233,16 @@ template <> struct vector_inst_set<double> {
 
   template <class tag> static pack_type binary(pack_type a, pack_type b) {
     return binary_op<pack_type, tag>()(a, b);
+  }
+
+  // unary op
+  template <typename T2, typename tag> struct unary_op {};
+  template <typename T2> struct unary_op<T2, sqrt_op> {
+    T2 operator()(T2 a) { return _mm_sqrt_pd(a); }
+  };
+
+  template <class tag> static pack_type unary(pack_type a) {
+    return unary_op<pack_type, tag>()(a);
   }
 };
 #endif // __AVX__

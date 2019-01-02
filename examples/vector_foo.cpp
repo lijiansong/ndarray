@@ -17,7 +17,7 @@
 
 BOOST_AUTO_TEST_SUITE(VectorTestCases)
 
-BOOST_AUTO_TEST_CASE(VectorBasic) {
+BOOST_AUTO_TEST_CASE(VectorBasicBinaryOp) {
   float *a = (float*)malloc(N * sizeof(float));
   float *b = (float*)malloc(N * sizeof(float));
   // bin op add
@@ -56,4 +56,22 @@ BOOST_AUTO_TEST_CASE(VectorBasic) {
   BOOST_CHECK(v6[6] == 2.f);
 }
 
+BOOST_AUTO_TEST_CASE(VectorBasicUnaryOp) {
+  float *a = (float*)malloc(N * sizeof(float));
+  // unary op sqrt
+  for(int i = 0; i<N; ++i) {
+    a[i] = 9.f;
+  }
+  ndarray::Vector<float, N> v1(a);
+  ndarray::Vector<float, N> v2;
+  v2 = sqrt(v1);
+  std::cout << v2;
+  BOOST_CHECK(v2[0] == 3.f);
+  BOOST_CHECK(v2[1] == 3.f);
+  BOOST_CHECK(v2[2] == 3.f);
+  BOOST_CHECK(v2[3] == 3.f);
+  BOOST_CHECK(v2[4] == 3.f);
+  BOOST_CHECK(v2[5] == 3.f);
+  BOOST_CHECK(v2[6] == 3.f);
+}
 BOOST_AUTO_TEST_SUITE_END()

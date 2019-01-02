@@ -13,6 +13,7 @@ template <typename T> struct store_type {
                                          T, const T &>::type;
 };
 
+// Binary Ops
 struct add_op {};
 
 template <typename T1, typename T2>
@@ -53,6 +54,26 @@ typename std::enable_if<is_node<T1>::value || is_node<T2>::value,
 operator-(const T1 &a, const T2 &b) {
   return utils::tuple<sub_op, typename store_type<T1>::type,
                       typename store_type<T2>::type>(sub_op(), a, b);
+}
+
+// Unary Ops
+struct sqrt_op {};
+
+template <typename T1>
+struct is_node<utils::tuple<sqrt_op, T1>> {
+  static const bool value = true;
+};
+
+template <typename T1>
+struct store_type<utils::tuple<sqrt_op, T1>> {
+  using type = utils::tuple<sqrt_op, T1>;
+};
+
+template <typename T1>
+typename std::enable_if<is_node<T1>::value,
+                        utils::tuple<sqrt_op, typename store_type<T1>::type>>::type
+sqrt(const T1 &a) {
+  return utils::tuple<sqrt_op, typename store_type<T1>::type>(sqrt_op(), a);
 }
 
 } // end of namespace ndarray

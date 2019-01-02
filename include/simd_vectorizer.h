@@ -29,6 +29,10 @@ template <typename T> struct scalar_inst_set {
     T2 operator()(T2 a, T2 b) { return a + b; }
   };
 
+  template <typename T2> struct binary_op<T2, sub_op> {
+    T2 operator()(T2 a, T2 b) { return a - b; }
+  };
+
   template <class tag> static pack_type binary(pack_type a, pack_type b) {
     return binary_op<pack_type, tag>()(a, b);
   }
@@ -67,6 +71,10 @@ template <> struct vector_inst_set<float> {
     T2 operator()(T2 a, T2 b) { return _mm256_add_ps(a, b); }
   };
 
+  template <typename T2> struct binary_op<T2, sub_op> {
+    T2 operator()(T2 a, T2 b) { return _mm256_sub_ps(a, b); }
+  };
+
   template <class tag> static pack_type binary(pack_type a, pack_type b) {
     return binary_op<pack_type, tag>()(a, b);
   }
@@ -98,6 +106,10 @@ template <> struct vector_inst_set<double> {
 
   template <typename T2> struct binary_op<T2, add_op> {
     T2 operator()(T2 a, T2 b) { return _mm256_add_pd(a, b); }
+  };
+
+  template <typename T2> struct binary_op<T2, sub_op> {
+    T2 operator()(T2 a, T2 b) { return _mm256_sub_pd(a, b); }
   };
 
   template <class tag> static pack_type binary(pack_type a, pack_type b) {
@@ -133,6 +145,10 @@ template <> struct vector_inst_set<float> {
     T2 operator()(T2 a, T2 b) { return _mm_add_ps(a, b); }
   };
 
+  template <typename T2> struct binary_op<T2, sub_op> {
+    T2 operator()(T2 a, T2 b) { return _mm_sub_ps(a, b); }
+  };
+
   template <class tag> static pack_type binary(pack_type a, pack_type b) {
     return binary_op<pack_type, tag>()(a, b);
   }
@@ -164,6 +180,10 @@ template <> struct vector_inst_set<double> {
 
   template <typename T2> struct binary_op<T2, add_op> {
     T2 operator()(T2 a, T2 b) { return _mm_add_pd(a, b); }
+  };
+
+  template <typename T2> struct binary_op<T2, sub_op> {
+    T2 operator()(T2 a, T2 b) { return _mm_sub_pd(a, b); }
   };
 
   template <class tag> static pack_type binary(pack_type a, pack_type b) {

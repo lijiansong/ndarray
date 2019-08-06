@@ -277,9 +277,9 @@ BOOST_AUTO_TEST_CASE(NDarrayReshape) {
   BOOST_CHECK(A[3] == 4);
   BOOST_CHECK(A[4] == 5);
   BOOST_CHECK(A[5] == 6);
-  std::cout << A(0, 1, 0) << std::endl;
-  std::cout << A(0, 1, 1) << std::endl;
-  std::cout << A(0, 1, 2) << std::endl;
+  std::cout << A(0, 1, 0) << '\n';
+  std::cout << A(0, 1, 1) << '\n';
+  std::cout << A(0, 1, 2) << '\n';
   BOOST_CHECK(A(0, 0, 0) == A[0]);
   BOOST_CHECK(A(0, 0, 1) == A[1]);
   BOOST_CHECK(A(0, 0, 2) == A[2]);
@@ -334,12 +334,12 @@ BOOST_AUTO_TEST_CASE(NDarrayReshape) {
   BOOST_CHECK(C(0, 1, 0) == 4);
   BOOST_CHECK(C(0, 1, 1) == 5);
   BOOST_CHECK(C(0, 1, 2) == 6);
-  std::cout << C(0, 0, 0) << std::endl;
-  std::cout << C(0, 0, 1) << std::endl;
-  std::cout << C(0, 0, 2) << std::endl;
-  std::cout << C(0, 1, 0) << std::endl;
-  std::cout << C(0, 1, 1) << std::endl;
-  std::cout << C(0, 1, 2) << std::endl;
+  std::cout << C(0, 0, 0) << '\n';
+  std::cout << C(0, 0, 1) << '\n';
+  std::cout << C(0, 0, 2) << '\n';
+  std::cout << C(0, 1, 0) << '\n';
+  std::cout << C(0, 1, 1) << '\n';
+  std::cout << C(0, 1, 2) << '\n';
 
   auto D = C.reshape<3, 2>();
   auto dim_sizes_d = D.dim_sizes();

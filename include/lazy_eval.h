@@ -1,5 +1,5 @@
-#ifndef _LAZY_EVAL_H_
-#define _LAZY_EVAL_H_
+#ifndef LAZY_EVAL_H
+#define LAZY_EVAL_H
 
 #include "utils.h"
 
@@ -143,4 +143,4 @@ struct vector_evaluator<utils::tuple<op, LHS, RHS>, U, model> {
 };
 } // end of namespace ndarray
 
-#endif // _LAZY_EVAL_H_
+#endif // LAZY_EVAL_H

@@ -1,5 +1,5 @@
-#ifndef _VECTOR_H_
-#define _VECTOR_H_
+#ifndef VECTOR_H
+#define VECTOR_H
 
 #include "vector_dynamic.h"
 #include "vector_static.h"
@@ -9,4 +9,4 @@ namespace ndarray {
 template <typename T, size_t N> using Vector = VectorInterface<T, N>;
 }
 
-#endif // _VECTOR_H_
+#endif // VECTOR_H

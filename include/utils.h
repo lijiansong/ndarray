@@ -1,5 +1,5 @@
-#ifndef _UTILS_H_
-#define _UTILS_H_
+#ifndef UTILS_H
+#define UTILS_H
 
 #include <iostream>
 
@@ -7,7 +7,7 @@
 #define LOG()                                                                  \
   {                                                                            \
     std::cout << __PRETTY_FUNCTION__ << "in file " << __FILE__ << ":"          \
-              << __LINE__ << std::endl;                                        \
+              << __LINE__ << '\n';                                             \
   }
 
 namespace utils {

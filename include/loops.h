@@ -1,5 +1,5 @@
-#ifndef _LOOPS_H_
-#define _LOOPS_H_
+#ifndef LOOPS_H
+#define LOOPS_H
 
 #include "utils.h"
 
@@ -520,4 +520,4 @@ struct loop<unroll, typename std::enable_if<(unroll >= 8), void>::type> {
   }
 };
 
-#endif // _LOOPS_H_
+#endif // LOOPS_H

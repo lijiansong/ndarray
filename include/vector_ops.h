@@ -1,5 +1,5 @@
-#ifndef _VECTOR_OPS_H_
-#define _VECTOR_OPS_H_
+#ifndef VECTOR_OPS_H
+#define VECTOR_OPS_H
 
 #include "utils.h"
 
@@ -60,4 +60,4 @@ GEN_VECTOR_UNARY_OP(rsqrt, rsqrt_op)
 
 } // end of namespace ndarray
 
-#endif // _VECTOR_OPS_H_
+#endif // VECTOR_OPS_H

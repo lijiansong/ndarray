@@ -1,5 +1,5 @@
-#ifndef _SIMD_VECTORIZER_H_
-#define _SIMD_VECTORIZER_H_
+#ifndef SIMD_VECTORIZER_H
+#define SIMD_VECTORIZER_H
 
 #include <immintrin.h>
 
@@ -348,4 +348,4 @@ template <> struct vector_inst_set<double> {
 };
 #endif // __AVX__
 
-#endif // _SIMD_VECTORIZER_H_
+#endif // SIMD_VECTORIZER_H

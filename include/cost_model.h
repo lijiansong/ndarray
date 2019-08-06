@@ -1,5 +1,5 @@
-#ifndef _COST_MODEL_H_
-#define _COST_MODEL_H_
+#ifndef COST_MODEL_H
+#define COST_MODEL_H
 
 #include "utils.h"
 #include "vector_ops.h"
@@ -49,4 +49,4 @@ static_execute(T1 expr) {
 
 } // end of namespace ndarray
 
-#endif // _COST_MODEL_H_
+#endif // COST_MODEL_H

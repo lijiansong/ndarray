@@ -1,5 +1,5 @@
-#ifndef _VECTOR_DYNAMIC_H_
-#define _VECTOR_DYNAMIC_H_
+#ifndef VECTOR_DYNAMIC_H
+#define VECTOR_DYNAMIC_H
 
 #include <algorithm>
 #include <cmath>
@@ -87,4 +87,4 @@ private:
 
 } // end of namespace ndarray
 
-#endif // _VECTOR_DYNAMIC_H_
+#endif // VECTOR_DYNAMIC_H

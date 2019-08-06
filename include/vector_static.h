@@ -1,5 +1,5 @@
-#ifndef _VECTOR_STATIC_H_
-#define _VECTOR_STATIC_H_
+#ifndef VECTOR_STATIC_H
+#define VECTOR_STATIC_H
 
 #include <algorithm>
 #include <cmath>
@@ -96,4 +96,4 @@ std::ostream &operator<<(std::ostream &os, const VectorInterface<T, N> &v) {
 
 } // end of namespace ndarray
 
-#endif // _VECTOR_STATIC_H_
+#endif // VECTOR_STATIC_H
